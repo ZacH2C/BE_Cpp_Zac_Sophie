@@ -8,12 +8,19 @@
 #include "core_simulation.h"
 #include <pthread.h>
 
+
+
 class AnalogSensorLuminosity: public Device
 {
 private:
-    int luminosite_environnement=200;
+    int alea;
+    int temps;
+
+
 public:
-    AnalogSensorLuminosity(int l);
+    AnalogSensorLuminosity(int l, int delta_t);
+    virtual void run();
+    int valeur_luminosite(void);
 };
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device

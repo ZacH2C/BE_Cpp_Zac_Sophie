@@ -11,9 +11,29 @@
 
 using namespace std;
 
-AnalogSensorLuminosity::AnalogSensorLuminosity(int l):Device()
+int luminosite_environnement=200;
+
+AnalogSensorLuminosity::AnalogSensorLuminosity(int l, int delta_t):Device()
 {
-    l=luminosite_environnement;
+    temps = delta_t;
+    luminosite_environnement=l;
+    alea = 1;
+}
+
+void AnalogSensorLuminosity::run()
+{
+    while(1)
+    {
+        alea=1-alea;
+        if(ptrmem!=NULL)
+            *ptrmem=luminosite_environnement+alea;
+        sleep(temps);
+    }
+}
+
+int AnalogSensorLuminosity::valeur_luminosite(void)
+{
+    return luminosite_environnement;
 }
 
 //classe AnalogSensorTemperature
