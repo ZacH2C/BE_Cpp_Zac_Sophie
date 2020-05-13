@@ -13,6 +13,23 @@ using namespace std;
 
 int luminosite_environnement=200;
 
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED():Device()
+{
+    est_allume=1;
+    luminosite_environnement += 50;
+}
+
+bool IntelligentDigitalActuatorLED::etat_LED(void)
+{
+    return est_allume;
+}
+
+IntelligentDigitalActuatorLED::~IntelligentDigitalActuatorLED()
+{
+    est_allume=0;
+    luminosite_environnement -= 50;
+}
+
 AnalogSensorLuminosity::AnalogSensorLuminosity(int l, int delta_t):Device()
 {
     temps = delta_t;

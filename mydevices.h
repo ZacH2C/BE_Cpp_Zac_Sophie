@@ -8,14 +8,21 @@
 #include "core_simulation.h"
 #include <pthread.h>
 
-
+class IntelligentDigitalActuatorLED: public Device
+{
+private:
+    bool est_allume;
+public:
+    IntelligentDigitalActuatorLED();
+    bool etat_LED(void);
+    virtual ~IntelligentDigitalActuatorLED();
+};
 
 class AnalogSensorLuminosity: public Device
 {
 private:
     int alea;
     int temps;
-
 
 public:
     AnalogSensorLuminosity(int l, int delta_t);
