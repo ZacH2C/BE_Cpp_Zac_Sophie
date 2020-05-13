@@ -11,6 +11,11 @@
 
 using namespace std;
 
+AnalogSensorLuminosity::AnalogSensorLuminosity(int l):Device()
+{
+    l=luminosite_environnement;
+}
+
 //classe AnalogSensorTemperature
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
   alea=1;
@@ -47,16 +52,10 @@ I2CActuatorScreen::I2CActuatorScreen ():Device(){
 
 void I2CActuatorScreen::run(){
   while(1){
-    if ( (i2cbus!=NULL)&&!(i2cbus->isEmptyRegister(i2caddr))){
+    if ((i2cbus!=NULL)&&!(i2cbus->isEmptyRegister(i2caddr))){
       Device::i2cbus->requestFrom(i2caddr, buf, I2C_BUFFER_SIZE);
       cout << "---screen :"<< buf << endl;
     }
     sleep(1);
     }
 }
-
-
-
-
-
-
