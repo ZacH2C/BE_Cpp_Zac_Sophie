@@ -9,6 +9,8 @@
 #include <windows.h>
 #include "core_simulation.h"
 
+//Coucou c'est un test
+
 // la fonction d'initialisation d'arduino
 void Board::setup()
 {
