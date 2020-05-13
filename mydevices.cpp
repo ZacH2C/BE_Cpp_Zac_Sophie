@@ -13,21 +13,45 @@ using namespace std;
 
 int luminosite_environnement=200;
 
-IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED():Device()
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device()
 {
-    est_allume=1;
-    luminosite_environnement += 50;
+    etat = LOW;
+    temps = t;
 }
 
-bool IntelligentDigitalActuatorLED::etat_LED(void)
-{
-    return est_allume;
+void IntelligentDigitalActuatorLED::run(){
+    while(1)
+    {
+        if(ptrmem!=NULL)
+            etat=*ptrmem;
+        if (etat==LOW)
+        {
+            luminosite_environnement -= 50;
+            cout << "La LED intelligente est eteinte\n";
+        }
+        else
+        {
+            luminosite_environnement += 50;
+            cout << "La LED intelligente est  allumee\n";
+        }
+        sleep(temps);
+    }
 }
 
-IntelligentDigitalActuatorLED::~IntelligentDigitalActuatorLED()
-{
-    est_allume=0;
-    luminosite_environnement -= 50;
+//classe DigitalActuatorLED
+DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
+}
+
+void DigitalActuatorLED::run(){
+  while(1){
+    if(ptrmem!=NULL)
+      state=*ptrmem;
+    if (state==LOW)
+      cout << "((((eteint))))\n";
+    else
+    cout << "((((allume))))\n";
+    sleep(temps);
+    }
 }
 
 AnalogSensorLuminosity::AnalogSensorLuminosity(int l, int delta_t):Device()
@@ -65,22 +89,6 @@ void AnalogSensorTemperature::run(){
       *ptrmem=val+alea;
     sleep(temps);
   }
-}
-
-//classe DigitalActuatorLED
-DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
-}
-
-void DigitalActuatorLED::run(){
-  while(1){
-    if(ptrmem!=NULL)
-      state=*ptrmem;
-    if (state==LOW)
-      cout << "((((eteint))))\n";
-    else
-    cout << "((((allume))))\n";
-    sleep(temps);
-    }
 }
 
 // classe I2CActuatorScreen

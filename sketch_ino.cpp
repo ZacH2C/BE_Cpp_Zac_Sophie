@@ -8,7 +8,7 @@ int main(){
   // achat des senseurs et actionneurs
   AnalogSensorTemperature temperature(DELAY,TEMP);
   AnalogSensorLuminosity Luminosite(205,2);
-  IntelligentDigitalActuatorLED LED_intelligente;
+  IntelligentDigitalActuatorLED LED_intelligente(DELAY);
   DigitalActuatorLED led1(DELAY);
   I2CActuatorScreen screen;
 

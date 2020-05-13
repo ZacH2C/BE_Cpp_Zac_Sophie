@@ -11,11 +11,11 @@
 class IntelligentDigitalActuatorLED: public Device
 {
 private:
-    bool est_allume;
+    bool etat;
+    int temps;
 public:
-    IntelligentDigitalActuatorLED();
-    bool etat_LED(void);
-    virtual ~IntelligentDigitalActuatorLED();
+    IntelligentDigitalActuatorLED(int t);
+    virtual void run();
 };
 
 class AnalogSensorLuminosity: public Device
