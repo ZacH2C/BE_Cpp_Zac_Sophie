@@ -7,6 +7,18 @@
 #include <string.h>
 #include "core_simulation.h"
 #include <pthread.h>
+#include <fstream>
+
+class ExternalDigitalSensorButton: public Device
+{
+private:
+    bool Etat_Bouton;
+
+public:
+    ExternalDigitalSensorButton(void);
+    bool BoutonPoussoir(void);
+    virtual void run();
+};
 
 class IntelligentDigitalActuatorLED: public Device
 {

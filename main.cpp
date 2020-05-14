@@ -14,16 +14,32 @@ void Board::setup()
 {
   // on configure la vitesse de la liaison
   Serial.begin(9600);
+
   // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
   pinMode(0,OUTPUT);
   pinMode(1,INPUT);
   pinMode(2,INPUT);
   pinMode(3,OUTPUT);
+  pinMode(4,INPUT);
 }
 
 // la boucle de controle arduino
-void Board::loop(){
-    char buf[100];
+void Board::loop()
+{
+
+    char AffichageBP[100]; char stock_lumiere[100];
+    int val_lumiere = analogRead(2); bool ValeurBP = analogRead(4);
+
+    sprintf(stock_lumiere,"lumiere %d",val_lumiere);
+    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
+    Serial.println(stock_lumiere);
+    Serial.println(AffichageBP);
+
+    digitalWrite(3,ValeurBP);
+    sleep(1);
+
+
+    /*char buf[100];
     char stock_lumiere[100];
     int val,val_lumiere;
     static int cpt=0;
@@ -62,5 +78,5 @@ void Board::loop(){
         digitalWrite(3,LOW);
     }
 
-    bascule=1-bascule;
+    bascule=1-bascule;*/
 }

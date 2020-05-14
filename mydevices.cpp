@@ -11,7 +11,39 @@
 
 using namespace std;
 
-int luminosite_environnement=200;
+extern int luminosite_environnement=200; //Devrait déclarer la variable dans tous les fichiers, à confirmer avec le prof
+
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(void)
+{
+    Etat_Bouton = LOW;
+}
+
+void ExternalDigitalSensorButton::run()
+{
+    bool Etat;
+    while(1)
+    {
+        Etat = BoutonPoussoir();
+        if(ptrmem!=NULL)
+        {
+            *ptrmem=Etat;
+        }
+    }
+}
+
+bool ExternalDigitalSensorButton::BoutonPoussoir(void)
+{
+    bool il_existe=0;
+    if(ifstream("on.txt"))
+    {// le fichier existe
+        il_existe = HIGH;
+    }
+    else
+    {
+        il_existe = LOW;
+    }
+    return il_existe;
+}
 
 IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device()
 {
@@ -20,18 +52,27 @@ IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device()
 }
 
 void IntelligentDigitalActuatorLED::run(){
+    bool flag=1;
     while(1)
     {
         if(ptrmem!=NULL)
             etat=*ptrmem;
         if (etat==LOW)
         {
-            luminosite_environnement -= 50;
+            if(flag == 0)
+            {
+                luminosite_environnement -= 50;
+                flag = 1;
+            }
             cout << "La LED intelligente est eteinte\n";
         }
         else
         {
-            luminosite_environnement += 50;
+            if(flag == 1)
+            {
+                luminosite_environnement += 50;
+                flag = 0;
+            }
             cout << "La LED intelligente est  allumee\n";
         }
         sleep(temps);

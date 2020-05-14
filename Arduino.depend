@@ -58,20 +58,21 @@
 	<pthread.h>
 	<mutex>
 
-1589388488 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\sketch_ino.cpp
+1589448673 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\sketch_ino.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<pthread.h>
 
-1589388488 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.h
+1589451011 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
 	<string.h>
 	"core_simulation.h"
 	<pthread.h>
+	<fstream>
 
-1589387483 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\main.cpp
+1589452057 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\main.cpp
 	<unistd.h>
 	<windows.h>
 	<stdio.h>
@@ -79,7 +80,7 @@
 	<windows.h>
 	"core_simulation.h"
 
-1589387091 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.cpp
+1589451446 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.cpp
 	"mydevices.h"
 	<unistd.h>
 	<windows.h>
