@@ -28,7 +28,7 @@ void Board::setup()
 }
 
 /*Problèmes dans cette version :
-- La synchronisation LED intelligente/Luxmètre ne se fait pas bien
+- La synchronisation LED intelligente/Luxmètre ne se fait pas bien --> ne fonctionne que si on modifie la variable temps (résolu vite fait) !
 - Problème avec l'utilisation simultanée du Bouton Poussoir et de la LED (intelligente pou pas)*/
 
 
@@ -40,12 +40,12 @@ void Board::loop()
     sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
     Serial.println(stock_lumiere);
 
-    /*char AffichageTemperature[100];
+    char AffichageTemperature[100];
     int ValeurTemperature = analogRead(3);
     sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
     Serial.println(AffichageTemperature);
 
-    char AffichageBP[100];
+    /*char AffichageBP[100];
     int ValeurBP = analogRead(2);
     sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
     Serial.println(AffichageBP);*/

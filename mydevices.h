@@ -52,7 +52,7 @@ class AnalogSensorLuminosity: public Capteurs
 private:
     int alea;
 public:
-    AnalogSensorLuminosity(int l, int delta_t);
+    AnalogSensorLuminosity(int delta_t, int l);
     virtual void run();
 };
 
