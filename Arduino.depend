@@ -58,12 +58,12 @@
 	<pthread.h>
 	<mutex>
 
-1589448673 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\sketch_ino.cpp
+1589534128 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\sketch_ino.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<pthread.h>
 
-1589451011 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.h
+1589535526 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -71,8 +71,9 @@
 	"core_simulation.h"
 	<pthread.h>
 	<fstream>
+	"Capteurs.h"
 
-1589452057 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\main.cpp
+1589534596 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\main.cpp
 	<unistd.h>
 	<windows.h>
 	<stdio.h>
@@ -80,9 +81,95 @@
 	<windows.h>
 	"core_simulation.h"
 
-1589451446 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.cpp
+1589535017 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
+
+1589535183 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\capteurs.h
+	"core_simulation.h"
+	<string.h>
+	<map>
+
+1589534583 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\capteurs.cpp
 	"mydevices.h"
 	<unistd.h>
 	<windows.h>
 	<pthread.h>
+	"core_simulation.h"
+
+1589382737 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\core_simulation.cpp
+	<pthread.h>
+	<thread>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	<time.h>
+	"core_simulation.h"
+
+1589646307 c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\core_simulation.h
+	<iostream>
+	<string>
+	<thread>
+	<pthread.h>
+	<mutex>
+
+1589645575 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\main.cpp
+	<unistd.h>
+	<windows.h>
+	<stdio.h>
+	<pthread.h>
+	<windows.h>
+	"core_simulation.h"
+
+1589646995 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\mydevices.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
+
+1589645118 c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\mydevices.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+	<fstream>
+	"Capteurs.h"
+	"Actionneurs.h"
+	"core_simulation.h"
+
+1589645039 c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\capteurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589650400 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\sketch_ino.cpp
+	"core_simulation.h"
+	"mydevices.h"
+	<pthread.h>
+
+1589645051 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\capteurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Capteurs.h"
+
+1589643917 c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\actionneurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589643917 source:c:\users\franck\documents\s8\c++\be_cpp_zac_sophie\actionneurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Actionneurs.h"
 

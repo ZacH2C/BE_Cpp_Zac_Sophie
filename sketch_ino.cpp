@@ -2,26 +2,32 @@
 #include "mydevices.h"
 #include <pthread.h>
 
-int main(){
+extern int luminosite_environnement;
+
+int main()
+{
     // creation d'une board
     Board esp8266;
 
-    // achat des senseurs et actionneurs
+    ExternalDigitalSensorButton BPoussoir(1);
+    esp8266.pin(2,BPoussoir);
+
     AnalogSensorTemperature temperature(DELAY,TEMP);
-    AnalogSensorLuminosity Luminosite(luminosite_environnement,2);
+    esp8266.pin(3,temperature);
+
     IntelligentDigitalActuatorLED LED_intelligente(DELAY);
-    DigitalActuatorLED led1(DELAY);
-    I2CActuatorScreen screen;
-    ExternalDigitalSensorButton BPoussoir;
+    esp8266.pin(13,LED_intelligente);
 
-    // branchement des capteurs actionneurs
-    esp8266.pin(0,led1);
-    esp8266.pin(1,temperature);
-    esp8266.pin(2,Luminosite);
-    esp8266.pin(3,LED_intelligente);
-    esp8266.pin(4,BPoussoir);
+    AnalogSensorLuminosity Luminosite(DELAY,luminosite_environnement);
+    esp8266.pin(1,Luminosite);
 
-    esp8266.i2c(1,screen);
+    /*DigitalActuatorLED led1(DELAY);
+    esp8266.pin(11,led1);*/
+
+    /*I2CActuatorScreen screen;*/
+    /*esp8266.i2c(1,screen);*/
+
+
 
     //allumage de la carte
     esp8266.run();

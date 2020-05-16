@@ -1,1 +1,1 @@
-=)
+Si ce fichier est présent dans l'arborescence du projet alors c'st comme si on appuie sur le bouton poussoir. S'il n'est pas présent alors le bouton possoir n'est pas appuyé.

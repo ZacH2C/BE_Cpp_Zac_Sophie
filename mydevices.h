@@ -1,77 +1,59 @@
 #ifndef MYDEVICES_H
 #define MYDEVICES_H
-
 #include <iostream>
 #include <thread>
 #include <unistd.h>
 #include <string.h>
-#include "core_simulation.h"
 #include <pthread.h>
 #include <fstream>
+#include "Capteurs.h"
+#include "Actionneurs.h"
+#include "core_simulation.h"
 
-class ExternalDigitalSensorButton: public Device
+class IntelligentDigitalActuatorLED: public Actionneurs
 {
-private:
-    bool Etat_Bouton;
-
 public:
-    ExternalDigitalSensorButton(void);
-    bool BoutonPoussoir(void);
+    IntelligentDigitalActuatorLED(int t):Actionneurs(t){};
     virtual void run();
-};
-
-class IntelligentDigitalActuatorLED: public Device
-{
-private:
-    bool etat;
-    int temps;
-public:
-    IntelligentDigitalActuatorLED(int t);
-    virtual void run();
-};
-
-class AnalogSensorLuminosity: public Device
-{
-private:
-    int alea;
-    int temps;
-
-public:
-    AnalogSensorLuminosity(int l, int delta_t);
-    virtual void run();
-    int valeur_luminosite(void);
-};
-
-// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
-class AnalogSensorTemperature: public Device {
-private:
-  // fait osciller la valeur du cpateur de 1
-  int alea;
-  // valeur de temperature mesuree
-  int val;
-  // temps entre 2 prises de valeurs
-  int temps;
-
-public:
-  //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d,int  t);
-  // thread representant le capteur et permettant de fonctionner independamment de la board
-  virtual void run();
 };
 
 // exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
-class DigitalActuatorLED: public Device {
-private:
-  // etat de la LED
-  int state;
-  // temps entre 2 affichage de l etat de la led
-  int temps;
-
+class DigitalActuatorLED: public Actionneurs
+{
 public:
     // initialisation du temps de rafraichiisement
-  DigitalActuatorLED(int t);
+  DigitalActuatorLED(int t):Actionneurs(t){};
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
+};
+
+
+// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
+class AnalogSensorTemperature: public Capteurs {
+private:
+  int alea; //fait osciller la valeur du cpateur de 1
+
+public:
+  AnalogSensorTemperature(int d,int  t);//constructeur ne pas oublier d'initialiser la classe mere
+  virtual void run();//thread representant le capteur et permettant de fonctionner independamment de la board
+};
+
+class ExternalDigitalSensorButton: public Capteurs
+{
+private:
+    int DocumentExiste(void);
+public:
+    ExternalDigitalSensorButton(int d);
+    virtual void run();
+};
+
+class AnalogSensorLuminosity: public Capteurs
+{
+private:
+    int alea;
+public:
+    AnalogSensorLuminosity(int l, int delta_t);
+    virtual void run();
 };
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device

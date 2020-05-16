@@ -1,39 +1,79 @@
 #include "mydevices.h"
-
 #ifdef unix
     #include <unistd.h>
     #elif defined _WIN32
     # include <windows.h>
     #define sleep(x) Sleep(1000 * (x))
 #endif
-
+#include<map>
 #include <pthread.h>
 
 using namespace std;
+int luminosite_environnement=300;
 
-extern int luminosite_environnement=200; //Devrait déclarer la variable dans tous les fichiers, à confirmer avec le prof
-
-ExternalDigitalSensorButton::ExternalDigitalSensorButton(void)
+//################################### CAPTEURS ###################################
+AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Capteurs()
 {
-    Etat_Bouton = LOW;
+    temps = d;
+    SortieCapteur=t;
+    alea=1;
+}
+
+void AnalogSensorTemperature::run()
+{
+    while(1)
+    {
+        alea=1-alea;
+        if(ptrmem!=NULL)
+            *ptrmem=SortieCapteur+alea;
+
+        sleep(temps);
+  }
+}
+
+AnalogSensorLuminosity::AnalogSensorLuminosity(int delta_t, int l):Capteurs()
+{
+    temps = delta_t;
+    SortieCapteur=l;
+    alea = 1;
+}
+
+void AnalogSensorLuminosity::run()
+{
+    while(1)
+    {
+        alea=1-alea; //Bascule : toutes les 3 secondes on ajoute un alea
+        if(ptrmem!=NULL)
+            *ptrmem=luminosite_environnement+alea;
+        //cout << luminosite_environnement << endl;
+        sleep(temps);
+    }
+}
+
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(int d):Capteurs()
+{
+    SortieCapteur = LOW;
+    temps = d;
 }
 
 void ExternalDigitalSensorButton::run()
 {
-    bool Etat;
+    int Etat;
     while(1)
     {
-        Etat = BoutonPoussoir();
+        Etat = DocumentExiste();
         if(ptrmem!=NULL)
         {
             *ptrmem=Etat;
         }
+
+        sleep(temps);
     }
 }
 
-bool ExternalDigitalSensorButton::BoutonPoussoir(void)
+int ExternalDigitalSensorButton::DocumentExiste(void)
 {
-    bool il_existe=0;
+    int il_existe=0;
     if(ifstream("on.txt"))
     {// le fichier existe
         il_existe = HIGH;
@@ -45,26 +85,21 @@ bool ExternalDigitalSensorButton::BoutonPoussoir(void)
     return il_existe;
 }
 
-IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device()
-{
-    etat = LOW;
-    temps = t;
-}
-
+//################################### ACTIONNEURS ###################################
 void IntelligentDigitalActuatorLED::run(){
     bool flag=1;
     while(1)
     {
         if(ptrmem!=NULL)
-            etat=*ptrmem;
-        if (etat==LOW)
+            EntreeActionneur = *ptrmem;
+        if (EntreeActionneur == LOW)
         {
             if(flag == 0)
             {
                 luminosite_environnement -= 50;
                 flag = 1;
             }
-            cout << "La LED intelligente est eteinte\n";
+            cout << "########## La LED intelligente est eteinte ##########\n" << luminosite_environnement << endl;
         }
         else
         {
@@ -73,65 +108,31 @@ void IntelligentDigitalActuatorLED::run(){
                 luminosite_environnement += 50;
                 flag = 0;
             }
-            cout << "La LED intelligente est  allumee\n";
+            cout << "########## La LED intelligente est  allumee ##########\n" << luminosite_environnement << endl;
         }
         sleep(temps);
     }
 }
 
 //classe DigitalActuatorLED
-DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
-}
-
-void DigitalActuatorLED::run(){
-  while(1){
-    if(ptrmem!=NULL)
-      state=*ptrmem;
-    if (state==LOW)
-      cout << "((((eteint))))\n";
-    else
-    cout << "((((allume))))\n";
-    sleep(temps);
-    }
-}
-
-AnalogSensorLuminosity::AnalogSensorLuminosity(int l, int delta_t):Device()
-{
-    temps = delta_t;
-    luminosite_environnement=l;
-    alea = 1;
-}
-
-void AnalogSensorLuminosity::run()
+void DigitalActuatorLED::run()
 {
     while(1)
     {
-        alea=1-alea;
         if(ptrmem!=NULL)
-            *ptrmem=luminosite_environnement+alea;
+            EntreeActionneur=*ptrmem;
+
+        if (EntreeActionneur==LOW)
+            cout << "########## La LED est eteinte ##########\n";
+
+        else
+            cout << "########## La LED est  allumee ##########\n";
+
         sleep(temps);
     }
 }
 
-int AnalogSensorLuminosity::valeur_luminosite(void)
-{
-    return luminosite_environnement;
-}
-
-//classe AnalogSensorTemperature
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
-  alea=1;
-}
-
-void AnalogSensorTemperature::run(){
-  while(1){
-    alea=1-alea;
-    if(ptrmem!=NULL)
-      *ptrmem=val+alea;
-    sleep(temps);
-  }
-}
-
+//################################### COMMUNICATION ###################################
 // classe I2CActuatorScreen
 I2CActuatorScreen::I2CActuatorScreen ():Device(){
   }

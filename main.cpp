@@ -16,34 +16,60 @@ void Board::setup()
   Serial.begin(9600);
 
   // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
-  pinMode(0,OUTPUT);
-  pinMode(1,INPUT);
-  pinMode(2,INPUT);
-  pinMode(3,OUTPUT);
-  pinMode(4,INPUT);
+  int i;
+  for(i=0 ; i<10 ; i++)
+  {
+      pinMode(i,INPUT);
+  }
+  for(i=10 ; i<20 ; i++)
+  {
+      pinMode(i,OUTPUT);
+  }
 }
+
+/*Problèmes dans cette version :
+- La synchronisation LED intelligente/Luxmètre ne se fait pas bien
+- Problème avec l'utilisation simultanée du Bouton Poussoir et de la LED (intelligente pou pas)*/
+
 
 // la boucle de controle arduino
 void Board::loop()
 {
-
-    char AffichageBP[100]; char stock_lumiere[100];
-    int val_lumiere = analogRead(2); bool ValeurBP = analogRead(4);
-
-    sprintf(stock_lumiere,"lumiere %d",val_lumiere);
-    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
+    char stock_lumiere[100];
+    int val_lumiere = analogRead(1);
+    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
     Serial.println(stock_lumiere);
-    Serial.println(AffichageBP);
 
-    digitalWrite(3,ValeurBP);
+    /*char AffichageTemperature[100];
+    int ValeurTemperature = analogRead(3);
+    sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
+    Serial.println(AffichageTemperature);
+
+    char AffichageBP[100];
+    int ValeurBP = analogRead(2);
+    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
+    Serial.println(AffichageBP);*/
+
+    static int bascule=0;
+    if(bascule)
+    {
+        digitalWrite(13,HIGH);
+    }
+    else
+    {
+        digitalWrite(13,LOW);
+    }
+    cout << "Etat de la bascule : " << bascule << endl;
+    bascule=1-bascule;
+
     sleep(1);
+
 
 
     /*char buf[100];
     char stock_lumiere[100];
     int val,val_lumiere;
     static int cpt=0;
-    static int bascule=0;
     int i=0;
 
     for(i=0;i<10;i++)
@@ -66,17 +92,5 @@ void Board::loop()
         cpt++;
         sleep(1);
     }
-    // on eteint et on allume la LED
-    if(bascule)
-    {
-        digitalWrite(0,HIGH);
-        digitalWrite(3,HIGH);
-    }
-    else
-    {
-        digitalWrite(0,LOW);
-        digitalWrite(3,LOW);
-    }
-
-    bascule=1-bascule;*/
+    */
 }
