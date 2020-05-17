@@ -9,7 +9,7 @@ int main()
     // creation d'une board
     Board esp8266;
 
-    ExternalDigitalSensorButton BPoussoir(1);
+    ExternalDigitalSensorButton BPoussoir;
     esp8266.pin(2,BPoussoir);
 
     AnalogSensorTemperature temperature(DELAY,TEMP);

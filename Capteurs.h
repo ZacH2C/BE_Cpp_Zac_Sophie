@@ -9,7 +9,7 @@ class Capteurs : public Device
 protected:
     static int CptCapteur;
     int SortieCapteur;
-    int temps;
+
 
 public:
     Capteurs(void);

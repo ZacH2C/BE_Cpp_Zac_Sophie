@@ -32,7 +32,7 @@ public:
 class AnalogSensorTemperature: public Capteurs {
 private:
   int alea; //fait osciller la valeur du cpateur de 1
-
+  int temps;
 public:
   AnalogSensorTemperature(int d,int  t);//constructeur ne pas oublier d'initialiser la classe mere
   virtual void run();//thread representant le capteur et permettant de fonctionner independamment de la board
@@ -43,7 +43,7 @@ class ExternalDigitalSensorButton: public Capteurs
 private:
     int DocumentExiste(void);
 public:
-    ExternalDigitalSensorButton(int d);
+    ExternalDigitalSensorButton();
     virtual void run();
 };
 
@@ -51,6 +51,7 @@ class AnalogSensorLuminosity: public Capteurs
 {
 private:
     int alea;
+    int temps;
 public:
     AnalogSensorLuminosity(int delta_t, int l);
     virtual void run();

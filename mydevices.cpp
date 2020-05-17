@@ -45,15 +45,14 @@ void AnalogSensorLuminosity::run()
         alea=1-alea; //Bascule : toutes les 3 secondes on ajoute un alea
         if(ptrmem!=NULL)
             *ptrmem=luminosite_environnement+alea;
-        //cout << luminosite_environnement << endl;
+
         sleep(temps);
     }
 }
 
-ExternalDigitalSensorButton::ExternalDigitalSensorButton(int d):Capteurs()
+ExternalDigitalSensorButton::ExternalDigitalSensorButton():Capteurs()
 {
     SortieCapteur = LOW;
-    temps = d;
 }
 
 void ExternalDigitalSensorButton::run()
@@ -66,8 +65,6 @@ void ExternalDigitalSensorButton::run()
         {
             *ptrmem=Etat;
         }
-
-        sleep(temps);
     }
 }
 
