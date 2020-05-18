@@ -10,7 +10,6 @@ protected:
     static int CptCapteur;
     int SortieCapteur;
 
-
 public:
     Capteurs(void);
     ~Capteurs(void);

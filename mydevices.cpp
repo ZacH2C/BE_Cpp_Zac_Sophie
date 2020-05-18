@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 using namespace std;
-int luminosite_environnement=300;
+int luminosite_environnement=200;
 
 //################################### CAPTEURS ###################################
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Capteurs()
@@ -34,7 +34,7 @@ void AnalogSensorTemperature::run()
 AnalogSensorLuminosity::AnalogSensorLuminosity(int delta_t, int l):Capteurs()
 {
     temps = delta_t;
-    SortieCapteur=l;
+    SortieCapteur = l;
     alea = 1;
 }
 
@@ -89,6 +89,7 @@ void IntelligentDigitalActuatorLED::run(){
     {
         if(ptrmem!=NULL)
             EntreeActionneur = *ptrmem;
+
         if (EntreeActionneur == LOW)
         {
             if(flag == 0)

@@ -36,24 +36,14 @@ void Board::setup()
 void Board::loop()
 {
     char stock_lumiere[100];
-    int val_lumiere = analogRead(1);
+    int val_lumiere = analogRead(1); //L'état de la température est lu chaque secondes
     sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
     Serial.println(stock_lumiere);
 
-    /*char AffichageTemperature[100];
-    int ValeurTemperature = analogRead(3);
-    sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
-    Serial.println(AffichageTemperature);*/
-
-    char AffichageBP[100];
-    int ValeurBP = analogRead(2);
-    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
-    Serial.println(AffichageBP);
-
     static int bascule=0;
-    if(bascule)
+    if(bascule) //Cette bascule change d'état chaque seconde
     {
-        digitalWrite(13,HIGH);
+        digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans sont état DELAY secondes puis pourra ensuite changer d'état
     }
     else
     {
@@ -61,10 +51,19 @@ void Board::loop()
     }
     cout << "Etat de la bascule : " << bascule << endl;
     bascule=1-bascule;
-
     sleep(1);
 
+    //Bouton poussoir
+    /*char AffichageBP[100];
+    int ValeurBP = analogRead(2);
+    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
+    Serial.println(AffichageBP);*/
 
+    //Thermomètre
+    /*char AffichageTemperature[100];
+    int ValeurTemperature = analogRead(3);
+    sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
+    Serial.println(AffichageTemperature);*/
 
     /*char buf[100];
     char stock_lumiere[100];

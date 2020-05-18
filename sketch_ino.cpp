@@ -18,7 +18,7 @@ int main()
     IntelligentDigitalActuatorLED LED_intelligente(DELAY);
     esp8266.pin(13,LED_intelligente);
 
-    AnalogSensorLuminosity Luminosite(1,luminosite_environnement);
+    AnalogSensorLuminosity Luminosite(0.1,luminosite_environnement);
     esp8266.pin(1,Luminosite);
 
     /*DigitalActuatorLED led1(DELAY);
