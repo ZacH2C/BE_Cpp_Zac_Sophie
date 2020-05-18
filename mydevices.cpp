@@ -97,7 +97,7 @@ void IntelligentDigitalActuatorLED::run(){
                 luminosite_environnement -= 50;
                 flag = 1;
             }
-            cout << "########## La LED intelligente est eteinte ##########\n";
+            //cout << "########## La LED intelligente est eteinte ##########\n";
         }
         else
         {
@@ -106,9 +106,8 @@ void IntelligentDigitalActuatorLED::run(){
                 luminosite_environnement += 50;
                 flag = 0;
             }
-            cout << "########## La LED intelligente est  allumee ##########\n";
+            //cout << "########## La LED intelligente est  allumee ##########\n";
         }
-
         sleep(temps);
     }
 }

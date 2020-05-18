@@ -27,18 +27,10 @@ void Board::setup()
   }
 }
 
-/*Problèmes dans cette version :
-- La synchronisation LED intelligente/Luxmètre ne se fait pas bien --> ne fonctionne que si on modifie la variable temps (résolu vite fait) !
-- Problème avec l'utilisation simultanée du Bouton Poussoir et de la LED (intelligente pou pas)*/
-
-
 // la boucle de controle arduino
 void Board::loop()
 {
-    char stock_lumiere[100];
-    int val_lumiere = analogRead(1); //L'état de la température est lu chaque secondes
-    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
-    Serial.println(stock_lumiere);
+    int val_lumiere_prec;
 
     static int bascule=0;
     if(bascule) //Cette bascule change d'état chaque seconde
@@ -49,21 +41,36 @@ void Board::loop()
     {
         digitalWrite(13,LOW);
     }
-    cout << "Etat de la bascule : " << bascule << endl;
+    //cout << "Etat de la bascule : " << bascule << endl;
     bascule=1-bascule;
-    sleep(1);
+
+    char stock_lumiere[100];
+    int val_lumiere = analogRead(1);
+    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
+    Serial.println(stock_lumiere);
+
+    bool flag=0;
+    int delat_luminosite=20;
+    //float delta_temps = 1;
+
+    if(abs(val_lumiere_prec - val_lumiere) > delat_luminosite)//detection d'un fornt
+    {
+        cout << "Val_lumiere : " << val_lumiere << " val_lumiere_prec : " << val_lumiere_prec << endl;
+    }
+    val_lumiere_prec = val_lumiere;
+    sleep(0.001);
 
     //Bouton poussoir
-    /*char AffichageBP[100];
+    char AffichageBP[100];
     int ValeurBP = analogRead(2);
     sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
-    Serial.println(AffichageBP);*/
+    Serial.println(AffichageBP);
 
     //Thermomètre
-    /*char AffichageTemperature[100];
-    int ValeurTemperature = analogRead(3);
+    char AffichageTemperature[100];
+    int ValeurTemperature = analogRead(6);
     sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
-    Serial.println(AffichageTemperature);*/
+    Serial.println(AffichageTemperature);
 
     /*char buf[100];
     char stock_lumiere[100];

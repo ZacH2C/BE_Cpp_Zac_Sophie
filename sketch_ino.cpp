@@ -13,7 +13,7 @@ int main()
     esp8266.pin(2,BPoussoir);
 
     AnalogSensorTemperature temperature(DELAY,TEMP);
-    esp8266.pin(3,temperature);
+    esp8266.pin(6,temperature);
 
     IntelligentDigitalActuatorLED LED_intelligente(DELAY);
     esp8266.pin(13,LED_intelligente);
