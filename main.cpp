@@ -9,6 +9,7 @@
 #include <windows.h>
 #include "core_simulation.h"
 
+
 // la fonction d'initialisation d'arduino
 void Board::setup()
 {
@@ -51,26 +52,33 @@ void Board::loop()
 
     bool flag=0;
     int delat_luminosite=20;
-    //float delta_temps = 1;
+    float delta_temps = 1;
+    bool clignotement;
 
-    if(abs(val_lumiere_prec - val_lumiere) > delat_luminosite)//detection d'un fornt
+    if(abs(val_lumiere_prec - val_lumiere) > delat_luminosite)//detection d'un front
     {
         cout << "Val_lumiere : " << val_lumiere << " val_lumiere_prec : " << val_lumiere_prec << endl;
+        clignotement = 1-clignotement;
+        cout << "Clignotement : " << clignotement << endl;
+        /*if(abs(temps_precedent - temps actuel) > delta_temps)
+        {
+
+        }*/
     }
     val_lumiere_prec = val_lumiere;
     sleep(0.001);
 
     //Bouton poussoir
-    char AffichageBP[100];
+    /*char AffichageBP[100];
     int ValeurBP = analogRead(2);
     sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
-    Serial.println(AffichageBP);
+    Serial.println(AffichageBP);*/
 
     //Thermomètre
-    char AffichageTemperature[100];
+    /*char AffichageTemperature[100];
     int ValeurTemperature = analogRead(6);
     sprintf(AffichageTemperature,"Temperature %d",ValeurTemperature);
-    Serial.println(AffichageTemperature);
+    Serial.println(AffichageTemperature);*/
 
     /*char buf[100];
     char stock_lumiere[100];

@@ -12,7 +12,7 @@ int main()
     ExternalDigitalSensorButton BPoussoir;
     esp8266.pin(2,BPoussoir);
 
-    AnalogSensorTemperature temperature(DELAY,TEMP);
+    AnalogSensorTemperature temperature(1,TEMP);
     esp8266.pin(6,temperature);
 
     IntelligentDigitalActuatorLED LED_intelligente(DELAY);
