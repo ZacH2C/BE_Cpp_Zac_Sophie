@@ -6,7 +6,7 @@
 #endif
 #include <stdio.h>
 #include <pthread.h>
-#include <windows.h>
+//#include <windows.h>
 #include "core_simulation.h"
 
 
@@ -20,7 +20,7 @@ void Board::setup()
   int i;
   for(i=0 ; i<10 ; i++)
   {
-      pinMode(i,INPUT);
+      pinMode(i,LINPUT);
   }
   for(i=10 ; i<20 ; i++)
   {

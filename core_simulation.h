@@ -18,7 +18,7 @@
 
 using namespace std;
 
-enum typeio {OUTPUT, INPUT};
+enum typeio {OUTPUT, LINPUT};
 
 // exceptions gerees
 enum excep {SPEED, INOUT, ADDRESS, SIZE_renom, EMPTY};

@@ -12,6 +12,10 @@ using namespace std;
 int luminosite_environnement=200;
 
 //################################### CAPTEURS ###################################
+
+//Pour l'accéléromètre, on se base sur les specs de l'ADXL345
+//AnalogSensorAccéléro
+
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Capteurs()
 {
     temps = d;

@@ -185,3 +185,87 @@
 	<windows.h>
 	"core_simulation.h"
 
+1589960636 source:d:\taf\be_cpp_zac_sophie\actionneurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Actionneurs.h"
+
+1589804708 d:\taf\be_cpp_zac_sophie\mydevices.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+	<fstream>
+	"Capteurs.h"
+	"Actionneurs.h"
+	"core_simulation.h"
+
+1589808906 d:\taf\be_cpp_zac_sophie\capteurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589960822 d:\taf\be_cpp_zac_sophie\core_simulation.h
+	<iostream>
+	<string>
+	<thread>
+	<pthread.h>
+	<mutex>
+
+1589804708 d:\taf\be_cpp_zac_sophie\actionneurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589958567 source:d:\taf\be_cpp_zac_sophie\board.cpp
+	"core_simulation.h"
+	"mydevices.h"
+	<pthread.h>
+	"modif_env.h"
+
+1589956728 d:\taf\be_cpp_zac_sophie\modif_env.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+	<fstream>
+	"Capteurs.h"
+	"Actionneurs.h"
+	"core_simulation.h"
+	"mydevices.h"
+
+1589960507 source:d:\taf\be_cpp_zac_sophie\capteurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Capteurs.h"
+
+1589956728 source:d:\taf\be_cpp_zac_sophie\core_simulation.cpp
+	<pthread.h>
+	<thread>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	<time.h>
+	"core_simulation.h"
+
+1589956728 source:d:\taf\be_cpp_zac_sophie\modif_env.cpp
+	"modif_env.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
+
+1589958567 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
+	<unistd.h>
+	<windows.h>
+	<stdio.h>
+	<pthread.h>
+	<windows.h>
+	"core_simulation.h"
+
