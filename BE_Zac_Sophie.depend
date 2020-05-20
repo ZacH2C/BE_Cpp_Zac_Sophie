@@ -92,3 +92,96 @@
 	<windows.h>
 	"core_simulation.h"
 
+1589643917 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\actionneurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Actionneurs.h"
+
+1589738713 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+	<fstream>
+	"Capteurs.h"
+	"Actionneurs.h"
+	"core_simulation.h"
+
+1589808274 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\capteurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589960622 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\core_simulation.h
+	<iostream>
+	<string>
+	<thread>
+	<pthread.h>
+	<mutex>
+
+1589643917 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\actionneurs.h
+	"core_simulation.h"
+	<string.h>
+	<vector>
+
+1589881453 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\board.cpp
+	"core_simulation.h"
+	"mydevices.h"
+	<pthread.h>
+	"modif_env.h"
+
+1589881435 c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\modif_env.h
+	<iostream>
+	<thread>
+	<unistd.h>
+	<string.h>
+	<pthread.h>
+	<fstream>
+	"Capteurs.h"
+	"Actionneurs.h"
+	"core_simulation.h"
+	"mydevices.h"
+
+1589645051 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\capteurs.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Capteurs.h"
+
+1589382737 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\core_simulation.cpp
+	<pthread.h>
+	<thread>
+	<unistd.h>
+	<windows.h>
+	<string.h>
+	<time.h>
+	"core_simulation.h"
+
+1589881316 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\modif_env.cpp
+	"modif_env.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
+
+1589814316 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\mydevices.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
+
+1589960622 source:c:\users\franck\documents\s8\c++\be\be_cpp_zac_sophie\sketch_ino.cpp
+	<unistd.h>
+	<windows.h>
+	<stdio.h>
+	<pthread.h>
+	<windows.h>
+	"core_simulation.h"
+
