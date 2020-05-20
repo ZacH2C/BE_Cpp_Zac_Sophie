@@ -39,6 +39,8 @@
 		<Unit filename="core_simulation.cpp" />
 		<Unit filename="core_simulation.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="modif_env.cpp" />
+		<Unit filename="modif_env.h" />
 		<Unit filename="mydevices.cpp" />
 		<Unit filename="mydevices.h" />
 		<Unit filename="sketch_ino.cpp" />

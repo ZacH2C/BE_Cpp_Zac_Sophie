@@ -32,8 +32,9 @@ void Board::setup()
 void Board::loop()
 {
     int val_lumiere_prec;
+    digitalWrite(14,HIGH);
 
-    static int bascule=0;
+    /*static int bascule=0;
     if(bascule) //Cette bascule change d'état chaque seconde
     {
         digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans sont état DELAY secondes puis pourra ensuite changer d'état
@@ -43,7 +44,7 @@ void Board::loop()
         digitalWrite(13,LOW);
     }
     //cout << "Etat de la bascule : " << bascule << endl;
-    bascule=1-bascule;
+    bascule=1-bascule;*/
 
     char stock_lumiere[100];
     int val_lumiere = analogRead(1);
@@ -66,7 +67,9 @@ void Board::loop()
         }*/
     }
     val_lumiere_prec = val_lumiere;
-    sleep(0.001);
+    sleep(0.1);
+
+    //Fonction : stockge lumière -> prends en compte le temps déchantillonage et stocke la lumière sur 2-3s. Fat tablo qui detecte la lumière sur 3s. Retourne un pointeur sur un tablo de talle variable.
 
     //Bouton poussoir
     /*char AffichageBP[100];
@@ -108,3 +111,5 @@ void Board::loop()
     }
     */
 }
+
+

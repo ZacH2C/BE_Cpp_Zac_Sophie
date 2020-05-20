@@ -1,6 +1,7 @@
 #include "core_simulation.h"
 #include "mydevices.h"
 #include <pthread.h>
+#include "modif_env.h"
 
 extern int luminosite_environnement;
 
@@ -20,6 +21,10 @@ int main()
 
     AnalogSensorLuminosity Luminosite(0.1,luminosite_environnement);
     esp8266.pin(1,Luminosite);
+
+
+    Clignoteur ClignoTest(50, 1,1); //Fréquence à 1, alpha à 50%
+    esp8266.pin(14,ClignoTest);
 
     /*DigitalActuatorLED led1(DELAY);
     esp8266.pin(11,led1);*/
