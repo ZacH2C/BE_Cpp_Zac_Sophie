@@ -3,18 +3,40 @@
     #include <unistd.h>
     #elif defined _WIN32
     # include <windows.h>
-    #define sleep(x) Sleep(1000 * (x))
+    #define sleep(x) Sleep(1 * (x))
 #endif
 #include<map>
 #include <pthread.h>
 
 using namespace std;
 int luminosite_environnement=200;
+int Accel_env_XYZ[3]={3,18,-20}; //Valeur standard de l'accélération de l'environnement en g
 
 //################################### CAPTEURS ###################################
 
-//Pour l'accéléromètre, on se base sur les specs de l'ADXL345
-//AnalogSensorAccéléro
+//Pour l'accéléromètre, on se base sur les specs de l'ADXL345 très simplifiées et on s'appuie sur l'architecture du capteur de lum
+//On considère que chaque axe compte comme un capteur indépendant des autres mais du même type
+//Axe=0,1,2 -> Axe=X,Y,Z
+AnalogSensorAccel::AnalogSensorAccel(int temps_param, int axe_param):Capteurs()
+{
+    temps=temps_param;
+    axe=axe_param;
+    alea = 1; //à modif
+}
+
+void AnalogSensorAccel::run()
+{
+    while(1)
+    {
+        alea=1-alea; //Bascule : toutes les 3 secondes on ajoute un alea
+        if(ptrmem!=NULL)
+            *ptrmem=Accel_env_XYZ[axe]+OFFSET; //+alea ? //On ne peut pas communiquer des négatifs par les pins
+            //! Il faut enlever l'offset au moment de l'affichage du résultat et ne pas dépasser l'offset dans les négatifs pour Accel_envXYZ
+        //cout<<"SLEEPING\n";
+        sleep(temps);
+        //cout<<"ENDOFSLEEP\n";
+    }
+}
 
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Capteurs()
 {
@@ -87,6 +109,43 @@ int ExternalDigitalSensorButton::DocumentExiste(void)
 }
 
 //################################### ACTIONNEURS ###################################
+//!Sophie
+void seconde::run()
+{
+    while(1)
+    {
+        cout << "1 seconde vient de s'ecouler" << endl;
+        sleep(1000);
+    }
+}
+
+void Bippeur::run()
+{
+    while(1)
+    {
+        if(ptrmem!=NULL)
+            EntreeActionneur=*ptrmem;
+
+        if (EntreeActionneur==LOW)
+        {
+            //cout << "########## Pas de son émis ##########\n";
+        }
+
+
+        else
+        {
+            cout << "########## Son emis de periode " << temps << " ##########\n";
+            /*digitalWrite(3,0); // état bas
+            sleep(temps); //on attend 1136 milli-secondes
+            digitalWrite(3,1); // état haut
+            sleep(temps); // on attend 1136 millisecondes*/
+        }
+
+
+    }
+}
+//!FinSophie
+
 void IntelligentDigitalActuatorLED::run(){
     bool flag=1;
     while(1)

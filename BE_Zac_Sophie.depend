@@ -185,14 +185,15 @@
 	<windows.h>
 	"core_simulation.h"
 
-1589960636 source:d:\taf\be_cpp_zac_sophie\actionneurs.cpp
+1589960768 source:d:\taf\be_cpp_zac_sophie\actionneurs.cpp
 	"mydevices.h"
 	<unistd.h>
+	<windows.h>
 	<pthread.h>
 	"core_simulation.h"
 	"Actionneurs.h"
 
-1589804708 d:\taf\be_cpp_zac_sophie\mydevices.h
+1590358621 d:\taf\be_cpp_zac_sophie\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -208,25 +209,27 @@
 	<string.h>
 	<vector>
 
-1589960822 d:\taf\be_cpp_zac_sophie\core_simulation.h
+1590359831 d:\taf\be_cpp_zac_sophie\core_simulation.h
 	<iostream>
 	<string>
 	<thread>
 	<pthread.h>
 	<mutex>
+	<map>
+	<vector>
 
 1589804708 d:\taf\be_cpp_zac_sophie\actionneurs.h
 	"core_simulation.h"
 	<string.h>
 	<vector>
 
-1589958567 source:d:\taf\be_cpp_zac_sophie\board.cpp
+1590358439 source:d:\taf\be_cpp_zac_sophie\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<pthread.h>
 	"modif_env.h"
 
-1589956728 d:\taf\be_cpp_zac_sophie\modif_env.h
+1590353545 d:\taf\be_cpp_zac_sophie\modif_env.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -238,14 +241,15 @@
 	"core_simulation.h"
 	"mydevices.h"
 
-1589960507 source:d:\taf\be_cpp_zac_sophie\capteurs.cpp
+1589960768 source:d:\taf\be_cpp_zac_sophie\capteurs.cpp
 	"mydevices.h"
 	<unistd.h>
+	<windows.h>
 	<pthread.h>
 	"core_simulation.h"
 	"Capteurs.h"
 
-1589956728 source:d:\taf\be_cpp_zac_sophie\core_simulation.cpp
+1589960822 source:d:\taf\be_cpp_zac_sophie\core_simulation.cpp
 	<pthread.h>
 	<thread>
 	<unistd.h>
@@ -254,18 +258,26 @@
 	<time.h>
 	"core_simulation.h"
 
-1589956728 source:d:\taf\be_cpp_zac_sophie\modif_env.cpp
+1590360364 source:d:\taf\be_cpp_zac_sophie\modif_env.cpp
 	"modif_env.h"
 	<unistd.h>
 	<windows.h>
 	<map>
 	<pthread.h>
 
-1589958567 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
+1590359932 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
 	<unistd.h>
 	<windows.h>
 	<stdio.h>
 	<pthread.h>
-	<windows.h>
 	"core_simulation.h"
+	<map>
+	<vector>
+
+1590358621 source:d:\taf\be_cpp_zac_sophie\mydevices.cpp
+	"mydevices.h"
+	<unistd.h>
+	<windows.h>
+	<map>
+	<pthread.h>
 

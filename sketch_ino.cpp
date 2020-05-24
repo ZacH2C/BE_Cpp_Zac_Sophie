@@ -2,13 +2,22 @@
     #include <unistd.h>
     #elif defined _WIN32
     # include <windows.h>
-    #define sleep(x) Sleep(1000 * (x))
+    #define sleep(x) Sleep(1 * (x))
 #endif
 #include <stdio.h>
 #include <pthread.h>
 //#include <windows.h>
 #include "core_simulation.h"
 
+//!Sophie
+#include <map>
+#include <vector>
+
+map<float,int> tableau;
+int robustesse = 0;
+//!FinSophie
+
+extern int Accel_env_XYZ[3];
 
 // la fonction d'initialisation d'arduino
 void Board::setup()
@@ -31,9 +40,139 @@ void Board::setup()
 // la boucle de controle arduino
 void Board::loop()
 {
-    //int val_lumiere_prec
-    //digitalWrite(14,HIGH);
+    static int i; static int j;
+    static int bascule=0;
+    float echantillonage = 10;
 
+
+    int val_lumiere = analogRead(1);
+    int val_BP = analogRead(2);
+
+    /*char stock_lumiere[100];
+    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
+    Serial.println(stock_lumiere);
+
+    char stock_BP[100];
+    sprintf(stock_BP,"Bouton poussoir %d",val_BP);
+    Serial.println(stock_BP);*/
+
+    if(bascule) //Cette bascule change d'état chaque seconde
+    {
+        digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans son état DELAY secondes (cf main) puis pourra ensuite changer d'état
+    }
+    else
+    {
+        digitalWrite(13,LOW);
+    }
+    bascule=1-bascule;
+
+    digitalWrite(14,LOW);
+
+    tableau = Stockage_lumiere(tableau,val_lumiere, echantillonage,i);
+    bool epilepsie = Traitement_lumiere(tableau, echantillonage);
+
+    if(epilepsie == 1)
+    {
+        j++;
+        cout << "ATTENTION : LA LUMINOSITE PEUT PROVOQUER UNE CRISE D'EPILEPSIE !" << endl;
+    }
+
+    if(j==3)
+    {
+        cout << "Je suis entree ici" << endl;
+        while(val_BP == LOW)
+        {
+            digitalWrite(15,HIGH);
+        }
+        j=0;
+    }
+    digitalWrite(15,LOW);
+    sleep(echantillonage);
+    i++;
+    //!Zac
+    /*digitalWrite(14,HIGH);
+    sleep(0.5);
+    cout<<"Valeurs mesurees : \nX:"<<analogRead(7)-OFFSET<<" Y:"<<analogRead(8)-OFFSET<<" Z:"<<analogRead(9)-OFFSET<<endl; //!OFFSET pour l'affichage
+    //cout<<"Valeurs reelles : \nX:"<<Accel_env_XYZ[0]<<" Y:"<<Accel_env_XYZ[1]<<" Z:"<<Accel_env_XYZ[2]<<endl;
+    */
+    //!FinZac
+}
+
+map<float,int> Board::Stockage_lumiere(map<float,int> tableau_temps_luminosite, int lumiere_instantanee, float periode_echentillonage, int compteur)
+{
+    map<float, int>::iterator it;
+    int nombre_elements = 3000/periode_echentillonage;
+    tableau_temps_luminosite.insert({compteur*periode_echentillonage,lumiere_instantanee});
+
+    if(compteur > nombre_elements)
+    {
+        it = tableau_temps_luminosite.begin();
+        tableau_temps_luminosite.erase(it);
+    }
+
+    return tableau_temps_luminosite;
+}
+
+bool Board::Traitement_lumiere(map<float,int> dernieres_secondes, float periode_echantillonage)
+{
+    int delta_luminosite = 40;
+    map<float,int>::iterator m_it = dernieres_secondes.begin();
+    int val_lumiere_prec = m_it->second;
+    vector<float> traitement_temps;
+    bool resultat;
+
+    for(m_it=dernieres_secondes.begin(); m_it!=dernieres_secondes.end(); m_it++)
+    {
+        if(abs(val_lumiere_prec - m_it->second) > delta_luminosite)//detection d'un front
+        {
+            traitement_temps.push_back(m_it->first); //On récupère les temps associés au fronts dans un vecteur
+        }
+        val_lumiere_prec = m_it->second;
+    }
+
+    if(dernieres_secondes.size()>= 3000/periode_echantillonage)
+    {
+        resultat = Traitement_frequence_clignotement(traitement_temps);
+    }
+
+    return resultat;
+}
+
+bool Board::Traitement_frequence_clignotement(vector<float> vecteur_temps)
+{
+    bool retour_fonction=0;
+    int i;
+
+    //cout << "vecteur_temps.size() " << vecteur_temps.size() << endl;
+    if(vecteur_temps.size() <= 70 && vecteur_temps.size() >= 5) //Valeurs empriques ! Peuvent être modifiés
+    {
+        robustesse++;
+        //cout << "vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] " << vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] << endl;
+    }
+
+    else
+    {
+        retour_fonction=0;
+    }
+
+    if(robustesse >= 10)
+    {
+        if(vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] <= 1200) //1200 est une valeur empirique ! Peut être modifiée
+        {
+            retour_fonction=1;
+        }
+        robustesse=0;
+    }
+    return retour_fonction;
+}
+
+
+//Peut être ajouté dans le loop au besoin :
+
+//Clignotement de la LED :
+
+
+//int val_lumiere_prec
     /*static int bascule=0;
     if(bascule) //Cette bascule change d'état chaque seconde
     {
@@ -46,10 +185,7 @@ void Board::loop()
     //cout << "Etat de la bascule : " << bascule << endl;
     bascule=1-bascule;*/
 
-    /*char stock_lumiere[100];
-    int val_lumiere = analogRead(1);
-    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
-    Serial.println(stock_lumiere);
+    /*
 
     bool flag=0;
     int delat_luminosite=20;
@@ -67,15 +203,8 @@ void Board::loop()
         }
     }
     val_lumiere_prec = val_lumiere;*/
-    sleep(0.1);
-
     //Fonction : stockge lumière -> prends en compte le temps déchantillonage et stocke la lumière sur 2-3s. Fat tablo qui detecte la lumière sur 3s. Retourne un pointeur sur un tablo de talle variable.
 
-    //Bouton poussoir
-    /*char AffichageBP[100];
-    int ValeurBP = analogRead(2);
-    sprintf(AffichageBP,"Bouton poussoir %d",ValeurBP);
-    Serial.println(AffichageBP);*/
 
     //Thermomètre
     /*char AffichageTemperature[100];
@@ -108,14 +237,4 @@ void Board::loop()
         }
         cpt++;
         sleep(1);
-    }
-    */
-}
-
-int Board::Stockage_lumiere(int lumiere_instantanee, int frequence_echentillonage)
-{
-
-    return 456;
-}
-
-
+    }*/

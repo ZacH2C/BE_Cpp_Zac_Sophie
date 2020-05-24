@@ -14,6 +14,20 @@
 #include "mydevices.h"
 
 extern int luminosite_environnement;
+extern int Accel_env_XYZ[3];
+
+//On crée un actionneur qui simule une agitation de l'accéléromètre
+class Shaker: public Actionneurs
+{
+private:
+    int amplitude; //amplitude des secousses
+    int F; //fréquence des secousses en Hz
+public:
+    // initialisation de la fréq de shake et du rapport cyclique
+  Shaker(int amplitude_param, int F_param, int t);
+  // thread representant l'actionneur et permettant de fonctionner independamment de la board
+  virtual void run();
+};
 
 //On créé un actionneur qui clignote et modifie l'environnement
 class Clignoteur: public Actionneurs

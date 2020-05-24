@@ -10,6 +10,27 @@
 #include "Actionneurs.h"
 #include "core_simulation.h"
 
+//!Sophie
+class Bippeur : public Actionneurs
+{
+private:
+    //int pinSignal;
+public:
+    Bippeur(int t): Actionneurs(t)
+    {
+        //pinSignal = pin;
+    };
+    virtual void run();
+};
+
+class seconde : public Actionneurs
+{
+public:
+    seconde(int t):Actionneurs(t){};
+    virtual void run();
+};
+//!FinSophie
+
 class IntelligentDigitalActuatorLED: public Actionneurs
 {
 public:
@@ -27,7 +48,22 @@ public:
   virtual void run();
 };
 
-
+//Accéléromètre
+class AnalogSensorAccel: public Capteurs
+{
+private:
+    //Oscillation val capteur
+    int alea;
+    //Axe choisi (X=0, Y=1, Z=2)
+    int axe;
+    //Temps entre 2 prises de valeur
+    int temps;
+public:
+    //Constructeur
+    AnalogSensorAccel(int temps_param, int axe_param);
+    //Thread du capteur indépendant de la board
+    virtual void run();
+};
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
 class AnalogSensorTemperature: public Capteurs {
 private:

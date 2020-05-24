@@ -16,6 +16,10 @@
 #define I2C_BUFFER_SIZE 1024
 #define MAX_IO_PIN 6
 
+#define OFFSET 20 //sert pour l'accéléro car on ne peut pas communiquer du négatif par les pins
+#include <map>
+#include <vector>
+
 using namespace std;
 
 enum typeio {OUTPUT, LINPUT};
@@ -126,7 +130,11 @@ public:
     // fonction arduino : boucle de controle de la carte arduino
     void loop();
 
-    int Stockage_lumiere(int lumiere_instantanee, int frequence_echentillonage);
+    //int Stockage_lumiere(int lumiere_instantanee, int frequence_echentillonage);
+    map<float,int> Stockage_lumiere(map<float,int> tableau_temps_luminosite, int lumiere_instantanee, float periode_echentillonage, int compteur);
+    bool Traitement_lumiere(map<float,int> dernieres_secondes, float periode_echantillonage);
+    bool Traitement_frequence_clignotement(vector<float> vecteur_temps);
+
 };
 
 #endif
