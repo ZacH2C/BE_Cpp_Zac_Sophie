@@ -33,7 +33,7 @@ void AnalogSensorAccel::run()
             *ptrmem=Accel_env_XYZ[axe]+OFFSET; //+alea ? //On ne peut pas communiquer des négatifs par les pins
             //! Il faut enlever l'offset au moment de l'affichage du résultat et ne pas dépasser l'offset dans les négatifs pour Accel_envXYZ
         //cout<<"SLEEPING\n";
-        sleep(temps);
+        sleep(1000*temps);
         //cout<<"ENDOFSLEEP\n";
     }
 }
