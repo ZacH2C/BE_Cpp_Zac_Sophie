@@ -134,7 +134,7 @@ public:
     map<float,int> Stockage_lumiere(map<float,int> tableau_temps_luminosite, int lumiere_instantanee, float periode_echentillonage, int compteur);
     bool Traitement_lumiere(map<float,int> dernieres_secondes, float periode_echantillonage);
     bool Traitement_frequence_clignotement(vector<float> vecteur_temps);
-
+    bool Detection_convulsions();
 };
 
 #endif
