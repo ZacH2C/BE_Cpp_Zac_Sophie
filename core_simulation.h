@@ -19,6 +19,7 @@
 #define OFFSET 20 //sert pour l'accéléro car on ne peut pas communiquer du négatif par les pins
 #include <map>
 #include <vector>
+#include "application.h"
 
 using namespace std;
 
@@ -95,6 +96,7 @@ public:
 
 // classe representant une carte arduino
 class Board{
+    friend class application;
 public:
     // valeur sur les pin
     unsigned short io[MAX_IO_PIN];
@@ -129,12 +131,21 @@ public:
     void setup();
     // fonction arduino : boucle de controle de la carte arduino
     void loop();
-
-    //int Stockage_lumiere(int lumiere_instantanee, int frequence_echentillonage);
-    map<float,int> Stockage_lumiere(map<float,int> tableau_temps_luminosite, int lumiere_instantanee, float periode_echentillonage, int compteur);
-    bool Traitement_lumiere(map<float,int> dernieres_secondes, float periode_echantillonage);
-    bool Traitement_frequence_clignotement(vector<float> vecteur_temps);
-    bool Detection_convulsions();
+    //Exception générée dans le cas où le vecteur de temps n'est pas encore rempli
+    class Erreur
+    {
+        private:
+            string code;
+        public:
+            Erreur(string ch)
+            {
+                code = ch;
+            }
+            string getErreur()
+            {
+                return code;
+            }
+    };
 };
 
 #endif

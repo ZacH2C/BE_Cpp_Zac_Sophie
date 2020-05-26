@@ -39,6 +39,8 @@
 		<Unit filename="BE_Zac_Sophie.layout" />
 		<Unit filename="Capteurs.cpp" />
 		<Unit filename="Capteurs.h" />
+		<Unit filename="Vecteurs_accel.cpp" />
+		<Unit filename="Vecteurs_accel.h" />
 		<Unit filename="board.cpp" />
 		<Unit filename="core_simulation.cpp" />
 		<Unit filename="core_simulation.h" />
@@ -47,10 +49,6 @@
 		<Unit filename="mydevices.cpp" />
 		<Unit filename="mydevices.h" />
 		<Unit filename="sketch_ino.cpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

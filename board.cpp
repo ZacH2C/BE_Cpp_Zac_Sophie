@@ -2,10 +2,11 @@
 #include "mydevices.h"
 #include <pthread.h>
 #include "modif_env.h"
-
+#include "application.h"
 
 extern int luminosite_environnement;
 extern int Accel_env_XYZ[3];
+
 
 int main()
 {
@@ -24,6 +25,7 @@ int main()
     ExternalDigitalSensorButton BPoussoir;
     esp8266.pin(2,BPoussoir);
 
+    /*
     //Acceleromètres
     AnalogSensorAccel Accel_X(0.1,'X');
     esp8266.pin(7,Accel_X);
@@ -34,9 +36,10 @@ int main()
     //Shaker
     Shaker My_Shaker(10,1,1);
     esp8266.pin(14,My_Shaker);
-
+    */
 
     //allumage de la carte
     esp8266.run();
+
     return 0;
 }

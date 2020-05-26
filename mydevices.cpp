@@ -113,14 +113,6 @@ int ExternalDigitalSensorButton::DocumentExiste(void)
 
 //################################### ACTIONNEURS ###################################
 //!Sophie
-void seconde::run()
-{
-    while(1)
-    {
-        cout << "1 seconde vient de s'ecouler" << endl;
-        sleep(1000);
-    }
-}
 
 void Bippeur::run()
 {
@@ -133,15 +125,9 @@ void Bippeur::run()
         {
             //cout << "########## Pas de son émis ##########\n";
         }
-
-
         else
         {
             cout << "########## Son emis de periode " << temps << " ##########\n";
-            /*digitalWrite(3,0); // état bas
-            sleep(temps); //on attend 1136 milli-secondes
-            digitalWrite(3,1); // état haut
-            sleep(temps); // on attend 1136 millisecondes*/
         }
 
 

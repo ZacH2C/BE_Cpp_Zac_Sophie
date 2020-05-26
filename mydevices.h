@@ -23,12 +23,6 @@ public:
     virtual void run();
 };
 
-class seconde : public Actionneurs
-{
-public:
-    seconde(int t):Actionneurs(t){};
-    virtual void run();
-};
 //!FinSophie
 
 class IntelligentDigitalActuatorLED: public Actionneurs
