@@ -54,13 +54,13 @@ class AnalogSensorAccel: public Capteurs
 private:
     //Oscillation val capteur
     int alea;
-    //Axe choisi (X=0, Y=1, Z=2)
-    int axe;
+    //Axe choisi ('X'/'Y'/'Z')
+    char axe;
     //Temps entre 2 prises de valeur
     int temps;
 public:
     //Constructeur
-    AnalogSensorAccel(int temps_param, int axe_param);
+    AnalogSensorAccel(int temps_param, char axe_param);
     //Thread du capteur indépendant de la board
     virtual void run();
 };

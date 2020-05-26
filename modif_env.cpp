@@ -30,15 +30,11 @@ void Shaker::run()
             NULL;
         else
         {
-            Accel_env_XYZ[0] += amplitude;
-            Accel_env_XYZ[1] += amplitude;
-            Accel_env_XYZ[2] += amplitude;
-            cout<<"UP"<<endl;
+            accel_env.modif_vect(amplitude, amplitude, amplitude);
+            //cout<<"UP"<<endl;
             sleep(T/2);
-            Accel_env_XYZ[0] -= amplitude;
-            Accel_env_XYZ[1] -= amplitude;
-            Accel_env_XYZ[2] -= amplitude;
-            cout<<"DOWN"<<endl;
+            accel_env.modif_vect(-amplitude, -amplitude, -amplitude);
+            //cout<<"DOWN"<<endl;
             sleep(T/2);
         }
 

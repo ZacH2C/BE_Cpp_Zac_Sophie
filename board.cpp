@@ -25,14 +25,14 @@ int main()
     esp8266.pin(2,BPoussoir);
 
     //Acceleromètres
-    AnalogSensorAccel Accel_X(0.1,0);
+    AnalogSensorAccel Accel_X(0.1,'X');
     esp8266.pin(7,Accel_X);
-    AnalogSensorAccel Accel_Y(0.1,1);
+    AnalogSensorAccel Accel_Y(0.1,'Y');
     esp8266.pin(8,Accel_Y);
-    AnalogSensorAccel Accel_Z(0.1,2);
+    AnalogSensorAccel Accel_Z(0.1,'Z');
     esp8266.pin(9,Accel_Z);
     //Shaker
-    Shaker My_Shaker(10,10,1);
+    Shaker My_Shaker(10,1,1);
     esp8266.pin(14,My_Shaker);
 
 

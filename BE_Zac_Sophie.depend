@@ -193,7 +193,7 @@
 	"core_simulation.h"
 	"Actionneurs.h"
 
-1590358621 d:\taf\be_cpp_zac_sophie\mydevices.h
+1590454233 d:\taf\be_cpp_zac_sophie\mydevices.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -223,13 +223,13 @@
 	<string.h>
 	<vector>
 
-1590358439 source:d:\taf\be_cpp_zac_sophie\board.cpp
+1590454488 source:d:\taf\be_cpp_zac_sophie\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<pthread.h>
 	"modif_env.h"
 
-1590353545 d:\taf\be_cpp_zac_sophie\modif_env.h
+1590454798 d:\taf\be_cpp_zac_sophie\modif_env.h
 	<iostream>
 	<thread>
 	<unistd.h>
@@ -240,6 +240,7 @@
 	"Actionneurs.h"
 	"core_simulation.h"
 	"mydevices.h"
+	"Vecteurs_accel.h"
 
 1589960768 source:d:\taf\be_cpp_zac_sophie\capteurs.cpp
 	"mydevices.h"
@@ -258,14 +259,14 @@
 	<time.h>
 	"core_simulation.h"
 
-1590360364 source:d:\taf\be_cpp_zac_sophie\modif_env.cpp
+1590454770 source:d:\taf\be_cpp_zac_sophie\modif_env.cpp
 	"modif_env.h"
 	<unistd.h>
 	<windows.h>
 	<map>
 	<pthread.h>
 
-1590360446 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
+1590438844 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
 	<unistd.h>
 	<windows.h>
 	<stdio.h>
@@ -274,10 +275,17 @@
 	<map>
 	<vector>
 
-1590358621 source:d:\taf\be_cpp_zac_sophie\mydevices.cpp
+1590454921 source:d:\taf\be_cpp_zac_sophie\mydevices.cpp
 	"mydevices.h"
 	<unistd.h>
 	<windows.h>
 	<map>
 	<pthread.h>
+	"Vecteurs_accel.h"
+
+1590453517 source:d:\taf\be_cpp_zac_sophie\vecteurs_accel.cpp
+	"Vecteurs_accel.h"
+
+1590453516 d:\taf\be_cpp_zac_sophie\vecteurs_accel.h
+	<cmath>
 

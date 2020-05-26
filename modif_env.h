@@ -12,9 +12,10 @@
 #include "Actionneurs.h"
 #include "core_simulation.h"
 #include "mydevices.h"
+#include "Vecteurs_accel.h"
 
 extern int luminosite_environnement;
-extern int Accel_env_XYZ[3];
+extern vecteur_accel accel_env;
 
 //On crée un actionneur qui simule une agitation de l'accéléromètre
 class Shaker: public Actionneurs

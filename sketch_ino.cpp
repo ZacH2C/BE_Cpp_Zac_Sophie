@@ -8,7 +8,7 @@
 #include <pthread.h>
 //#include <windows.h>
 #include "core_simulation.h"
-
+#include "Vecteurs_accel.h"
 //!Sophie
 #include <map>
 #include <vector>
@@ -17,7 +17,7 @@ map<float,int> tableau;
 int robustesse = 0;
 //!FinSophie
 
-extern int Accel_env_XYZ[3];
+extern vecteur_accel accel_env;
 
 // la fonction d'initialisation d'arduino
 void Board::setup()
@@ -40,61 +40,67 @@ void Board::setup()
 // la boucle de controle arduino
 void Board::loop()
 {
-    static int i; static int j;
-    static int bascule=0;
-    float echantillonage = 10;
+    //!Sophie
 
-
-    int val_lumiere = analogRead(1);
-    int val_BP = analogRead(2);
-
-    /*char stock_lumiere[100];
-    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
-    Serial.println(stock_lumiere);
-
-    char stock_BP[100];
-    sprintf(stock_BP,"Bouton poussoir %d",val_BP);
-    Serial.println(stock_BP);*/
-
-    if(bascule) //Cette bascule change d'état chaque seconde
-    {
-        digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans son état DELAY secondes (cf main) puis pourra ensuite changer d'état
-    }
-    else
-    {
-        digitalWrite(13,LOW);
-    }
-    bascule=1-bascule;
-
-    digitalWrite(14,LOW);
-
-    tableau = Stockage_lumiere(tableau,val_lumiere, echantillonage,i);
-    bool epilepsie = Traitement_lumiere(tableau, echantillonage);
-
-    if(epilepsie == 1)
-    {
-        j++;
-        cout << "ATTENTION : LA LUMINOSITE PEUT PROVOQUER UNE CRISE D'EPILEPSIE !" << endl;
-    }
-
-    if(j==3)
-    {
-        cout << "Je suis entree ici" << endl;
-        while(val_BP == LOW)
-        {
-            digitalWrite(15,HIGH);
-        }
-        j=0;
-    }
-    digitalWrite(15,LOW);
-    sleep(echantillonage);
-    i++;
+//    static int i; static int j;
+//    static int bascule=0;
+//    float echantillonage = 10;
+//
+//
+//    int val_lumiere = analogRead(1);
+//    int val_BP = analogRead(2);
+//
+//    /*char stock_lumiere[100];
+//    sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
+//    Serial.println(stock_lumiere);
+//
+//    char stock_BP[100];
+//    sprintf(stock_BP,"Bouton poussoir %d",val_BP);
+//    Serial.println(stock_BP);*/
+//
+//    if(bascule) //Cette bascule change d'état chaque seconde
+//    {
+//        digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans son état DELAY secondes (cf main) puis pourra ensuite changer d'état
+//    }
+//    else
+//    {
+//        digitalWrite(13,LOW);
+//    }
+//    bascule=1-bascule;
+//
+//    digitalWrite(14,LOW);
+//
+//    tableau = Stockage_lumiere(tableau,val_lumiere, echantillonage,i);
+//    bool epilepsie = Traitement_lumiere(tableau, echantillonage);
+//
+//    if(epilepsie == 1)
+//    {
+//        j++;
+//        cout << "ATTENTION : LA LUMINOSITE PEUT PROVOQUER UNE CRISE D'EPILEPSIE !" << endl;
+//    }
+//
+//    if(j==3)
+//    {
+//        cout << "Je suis entree ici" << endl;
+//        while(val_BP == LOW)
+//        {
+//            digitalWrite(15,HIGH);
+//        }
+//        j=0;
+//    }
+//    digitalWrite(15,LOW);
+//    sleep(echantillonage);
+//    i++;
+//
+    //!FinSophie
     //!Zac
-    /*digitalWrite(14,HIGH);
-    sleep(0.5);
+    //float echantillonage = 10; //Execution de la loop toutes les 10 ms (sans prendre en compte  le tps d'éxec)
+    //sleep(echantillonage);
+    digitalWrite(14,HIGH);
+    sleep(500);
     cout<<"Valeurs mesurees : \nX:"<<analogRead(7)-OFFSET<<" Y:"<<analogRead(8)-OFFSET<<" Z:"<<analogRead(9)-OFFSET<<endl; //!OFFSET pour l'affichage
-    //cout<<"Valeurs reelles : \nX:"<<Accel_env_XYZ[0]<<" Y:"<<Accel_env_XYZ[1]<<" Z:"<<Accel_env_XYZ[2]<<endl;
-    */
+    cout<<"Valeurs reelles : \nX:"<<accel_env.get_val('X')<<" Y:"<<accel_env.get_val('Y')<<" Z:"<<accel_env.get_val('Z')<<endl;
+
     //!FinZac
 }
 

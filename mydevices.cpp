@@ -7,17 +7,20 @@
 #endif
 #include<map>
 #include <pthread.h>
+#include "Vecteurs_accel.h"
 
 using namespace std;
 int luminosite_environnement=200;
 int Accel_env_XYZ[3]={3,18,-20}; //Valeur standard de l'accélération de l'environnement en g
 
+vecteur_accel accel_env(12,1,5);
+
 //################################### CAPTEURS ###################################
 
 //Pour l'accéléromètre, on se base sur les specs de l'ADXL345 très simplifiées et on s'appuie sur l'architecture du capteur de lum
 //On considère que chaque axe compte comme un capteur indépendant des autres mais du même type
-//Axe=0,1,2 -> Axe=X,Y,Z
-AnalogSensorAccel::AnalogSensorAccel(int temps_param, int axe_param):Capteurs()
+//Axe='X' ou 'Y' ou 'Z'
+AnalogSensorAccel::AnalogSensorAccel(int temps_param, char axe_param):Capteurs()
 {
     temps=temps_param;
     axe=axe_param;
@@ -30,7 +33,7 @@ void AnalogSensorAccel::run()
     {
         alea=1-alea; //Bascule : toutes les 3 secondes on ajoute un alea
         if(ptrmem!=NULL)
-            *ptrmem=Accel_env_XYZ[axe]+OFFSET; //+alea ? //On ne peut pas communiquer des négatifs par les pins
+            *ptrmem=accel_env.get_val(axe)+OFFSET; //+alea ? //On ne peut pas communiquer des négatifs par les pins
             //! Il faut enlever l'offset au moment de l'affichage du résultat et ne pas dépasser l'offset dans les négatifs pour Accel_envXYZ
         //cout<<"SLEEPING\n";
         sleep(1000*temps);
