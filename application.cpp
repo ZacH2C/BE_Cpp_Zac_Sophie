@@ -125,6 +125,11 @@ bool application::Traitement_frequence_clignotement(vector<float> vecteur_temps)
 
 bool application::Detection_convulsions()
 {
+    cout<<"Env:"<<endl;
+    accel_env.afficher_vect();
+    cout<<"Ref:"<<endl;
+    accel_stab.afficher_vect();
+
     float tolerance_angle = 5; //Degs
     float tolerance_norme = 10;
     bool retour=FALSE;

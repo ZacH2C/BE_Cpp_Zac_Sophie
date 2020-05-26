@@ -19,6 +19,7 @@ public:
 
     ///Méthodes
     float norme_vect() const;
+    void afficher_vect() const;
 
 private:
     int m_X;

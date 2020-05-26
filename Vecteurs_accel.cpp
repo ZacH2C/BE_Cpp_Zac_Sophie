@@ -1,4 +1,6 @@
 #include "Vecteurs_accel.h"
+#include <iostream>
+using namespace std;
 
 //Constructeur par défaut
 vecteur_accel::vecteur_accel() : m_X(0), m_Y(0), m_Z(0)
@@ -15,13 +17,15 @@ vecteur_accel::~vecteur_accel()
 
 int vecteur_accel::get_val(char Axe) const
 {
+    int retour;
     switch(Axe)
     {
-        case 'X': return m_X;     break;
-        case 'Y': return m_Y;     break;
-        case 'Z': return m_Z;     break;
-        default : return 1337;    break;
+        case 'X': retour=m_X;     break;
+        case 'Y': retour=m_Y;     break;
+        case 'Z': retour=m_Z;     break;
+        default : retour=1337;    break;
     }
+    return retour;
 }
 
 void vecteur_accel::set_vect(int X, int Y, int Z)
@@ -43,6 +47,11 @@ float vecteur_accel::norme_vect() const
     return sqrt(m_X*m_X+m_Y*m_Y+m_Z*m_Z);
 }
 
+void vecteur_accel::afficher_vect() const
+{
+    cout<<"X="<<m_X<<" Y="<<m_Y<<" Z="<<m_Z<<endl;
+}
+
 //Produit scalaire entre deux vecteurs
 int operator*(vecteur_accel const& vect_a, vecteur_accel const& vect_b)
 {
@@ -52,8 +61,11 @@ int operator*(vecteur_accel const& vect_a, vecteur_accel const& vect_b)
 //Angle entre deux vecteurs
 float operator-(vecteur_accel const& vect_a, vecteur_accel const& vect_b)
 {
-    if(vect_a.norme_vect()==0 || vect_b.norme_vect()==0) return 0;
-    else return acos((vect_a*vect_b)/(vect_a.norme_vect()*vect_b.norme_vect()))*180/PI;
+    float retour;
+    cout<<"OPERATION\n"<<endl;
+    if(vect_a.norme_vect()==0 || vect_b.norme_vect()==0) retour=0;
+    else retour=acos((vect_a*vect_b)/(vect_a.norme_vect()*vect_b.norme_vect()))*180/PI;
+    return retour;
 }
 
 ///La fonction acos a comme specs :
