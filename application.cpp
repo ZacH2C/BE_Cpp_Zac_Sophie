@@ -14,8 +14,6 @@
 #include "modif_env.h"
 #include "mydevices.h"
 //!Sophie
-#include <map>
-#include <vector>
 
 //Pour accéléro
 extern vecteur_accel accel_env;
@@ -32,6 +30,16 @@ application::application()
     j=0;
     bascule=0;
     robustesse=0;
+}
+
+application::application(Board *b)
+{
+    epilepsie=0;
+    i=0;
+    j=0;
+    bascule=0;
+    robustesse=0;
+    ma_board=b;
 }
 
 //Mutateur
@@ -78,7 +86,6 @@ bool application::Traitement_lumiere(map<float,int> dernieres_secondes, float pe
     if(dernieres_secondes.size()<= 3000/periode_echantillonage)
     {
         //throw Erreur(string("Il faut attendre trois secondes au demarage"));
-        NULL;
     }
     else
     {
@@ -93,7 +100,7 @@ bool application::Traitement_frequence_clignotement(vector<float> vecteur_temps)
     bool retour_fonction=0;
 
     cout << "vecteur_temps.size() " << vecteur_temps.size() << endl;
-    if(vecteur_temps.size() <= 70 && vecteur_temps.size() >= 5) //Valeurs empriques ! Peuvent être modifiés
+    if(vecteur_temps.size() <= 95 && vecteur_temps.size() >= 40) //Valeurs empriques ! Peuvent être modifiés
     {
         robustesse++;
         //cout << "vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] " << vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] << endl;
@@ -106,7 +113,7 @@ bool application::Traitement_frequence_clignotement(vector<float> vecteur_temps)
 
     if(robustesse >= 10)
     {
-        if(vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] <= 1200) //1200 est une valeur empirique ! Peut être modifiée
+        if(vecteur_temps[vecteur_temps.size()-1]-vecteur_temps[vecteur_temps.size()-11] <= 700) //1200 est une valeur empirique ! Peut être modifiée
         {
             retour_fonction=1;
         }
@@ -147,7 +154,7 @@ bool application::Detection_convulsions()
     if (cpt_perturb>10) //On a rencontré trop de perturbations, on donne la priorité aux perturbations
     {
         //FAIRE QQCHOSE GENRE UN BIP OU JSP MAIS CA VA PAS PK PAS UNE !EXCEPTION!
-        retour = TRUE;
+        retour = true;
     }
     else
     {
@@ -164,8 +171,8 @@ bool application::Detection_convulsions()
     ///Méthodes principale
 void application::do_one_step_lumiere(float echantillonage_board )
 {
-    int val_lumiere=analogRead(1);
-    int val_BP=analogRead(2);
+    int val_lumiere=ma_board->analogRead(1);
+    int val_BP=ma_board->analogRead(2);
     /*char stock_lumiere[100];
     sprintf(stock_lumiere,"Lumiere %d",val_lumiere);
     Serial.println(stock_lumiere);
@@ -177,17 +184,17 @@ void application::do_one_step_lumiere(float echantillonage_board )
     //On fait clignotter la LED
     if(bascule) //Cette bascule change d'état chaque seconde
     {
-        digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans son état DELAY secondes (cf main) puis pourra ensuite changer d'état
+        ma_board->digitalWrite(13,HIGH); //Par nature, la LED intelligente restera dans son état DELAY secondes (cf main) puis pourra ensuite changer d'état
     }
     else
     {
-        digitalWrite(13,LOW);
+        ma_board->digitalWrite(13,LOW);
     }
     bascule=1-bascule;
 
     //On stocke la lumière et les temps qui y sont associés dans une map et on traite ces informations
-    tableau = application.Stockage_lumiere(tableau,val_lumiere, echantillonage_board,i);
-    epilepsie = application.Traitement_lumiere(tableau, echantillonage_board);
+    tableau = Stockage_lumiere(tableau,val_lumiere, echantillonage_board,i);
+    epilepsie = Traitement_lumiere(tableau, echantillonage_board);
     /*
     try
     {
@@ -203,27 +210,30 @@ void application::do_one_step_lumiere(float echantillonage_board )
     if(epilepsie == 1)
     {
         j++;
+        cout<<"ATTENTION CRISE EPP"<<endl;
     }
 
     if(j==3)
     {
+        cout<<"ON RENTRE DANS LA BOUCLE"<<endl;
         if(val_BP == 0)
         {
-            while(analogRead(2) != 1)
+            while(ma_board->analogRead(2) != 1)
             {
-                digitalWrite(15,HIGH);
+                ma_board->digitalWrite(15,HIGH);
             }
         }
         j=0;
     }
-    digitalWrite(15,LOW);
+    ma_board->digitalWrite(15,LOW);
     i++;
+    sleep(echantillonage_board);
 }
 void application::do_one_step_convulsions()
 {
     //float echantillonage = 10; //Execution de la loop toutes les 10 ms (sans prendre en compte  le tps d'éxec)
     //sleep(echantillonage);
-    digitalWrite(14,HIGH);
-    cout<<"Valeurs mesurees : \nX:"<<analogRead(7)-OFFSET<<" Y:"<<analogRead(8)-OFFSET<<" Z:"<<analogRead(9)-OFFSET<<endl; //!OFFSET pour l'affichage
+    ma_board->digitalWrite(14,HIGH);
+    cout<<"Valeurs mesurees : \nX:"<<ma_board->analogRead(7)-OFFSET<<" Y:"<<ma_board->analogRead(8)-OFFSET<<" Z:"<<ma_board->analogRead(9)-OFFSET<<endl; //!OFFSET pour l'affichage
     cout<<"Valeurs reelles : \nX:"<<accel_env.get_val('X')<<" Y:"<<accel_env.get_val('Y')<<" Z:"<<accel_env.get_val('Z')<<endl;
 }

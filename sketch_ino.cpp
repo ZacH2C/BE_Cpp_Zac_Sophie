@@ -14,10 +14,6 @@
 #include <map>
 #include <vector>
 
-application mon_application;
-
-
-
 
 // la fonction d'initialisation d'arduino
 void Board::setup()
@@ -35,15 +31,13 @@ void Board::setup()
   {
       pinMode(i,OUTPUT);
   }
+  mon_application= new application(this);
 }
 
 // la boucle de controle arduino
 void Board::loop()
 {
-    //application.set_board(this);
-    float echantillonage = 10;
-    mon_application.do_one_step_lumiere(echantillonage);
+    mon_application->do_one_step_lumiere(10);
     //application.do_one_step_convulsions();
-    sleep(echantillonage);
 }
 //!Zac

@@ -209,7 +209,7 @@
 	<string.h>
 	<vector>
 
-1590508230 d:\taf\be_cpp_zac_sophie\core_simulation.h
+1590510598 d:\taf\be_cpp_zac_sophie\core_simulation.h
 	<iostream>
 	<string>
 	<thread>
@@ -224,7 +224,7 @@
 	<string.h>
 	<vector>
 
-1590507715 source:d:\taf\be_cpp_zac_sophie\board.cpp
+1590512315 source:d:\taf\be_cpp_zac_sophie\board.cpp
 	"core_simulation.h"
 	"mydevices.h"
 	<pthread.h>
@@ -268,7 +268,7 @@
 	<map>
 	<pthread.h>
 
-1590506594 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
+1590511191 source:d:\taf\be_cpp_zac_sophie\sketch_ino.cpp
 	<unistd.h>
 	<windows.h>
 	<stdio.h>
@@ -293,8 +293,19 @@
 1590453516 d:\taf\be_cpp_zac_sophie\vecteurs_accel.h
 	<cmath>
 
-1590508380 d:\taf\be_cpp_zac_sophie\application.h
+1590510598 d:\taf\be_cpp_zac_sophie\application.h
 	<map>
 	<vector>
 	"core_simulation.h"
+
+1590511828 source:d:\taf\be_cpp_zac_sophie\application.cpp
+	"application.h"
+	<unistd.h>
+	<windows.h>
+	<stdio.h>
+	<pthread.h>
+	"core_simulation.h"
+	"Vecteurs_accel.h"
+	"modif_env.h"
+	"mydevices.h"
 

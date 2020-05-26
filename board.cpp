@@ -16,7 +16,8 @@ int main()
     AnalogSensorLuminosity Luminosite(10,luminosite_environnement);
     esp8266.pin(1,Luminosite);
 
-    IntelligentDigitalActuatorLED LED_intelligente(25); //Entre 25 et 33 pour déclencher une crise d'épilepsie
+    //Entre 25 et 33 pour déclencher une crise d'épilepsie (+marge)
+    IntelligentDigitalActuatorLED LED_intelligente(50);
     esp8266.pin(13,LED_intelligente);
 
     Bippeur Signal_sonore(1136);

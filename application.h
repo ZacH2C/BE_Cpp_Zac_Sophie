@@ -3,16 +3,16 @@
 #include <map>
 #include <vector>
 #include "core_simulation.h"
+using namespace std;
 
-map<float,int> ma_map;
+class Board;
 
 class application
 {
     //friend class Board;
-
 public:
     application();                    //Constructeur par défaut
-    //application(int X, int Y, int Z); //Constructeur avec params
+    application(Board *b); //Constructeur avec params
     ~application();
 
     ///Mutateur
@@ -32,7 +32,7 @@ public:
     void do_one_step_convulsions();
 
 private:
-    //Board ma_board;
+    Board *ma_board;
     ///METTRE VAR GLOBALES
     bool epilepsie;
     int i; int j;

@@ -23,6 +23,8 @@
 
 using namespace std;
 
+class application;
+
 enum typeio {OUTPUT, LINPUT};
 
 // exceptions gerees
@@ -96,7 +98,6 @@ public:
 
 // classe representant une carte arduino
 class Board{
-    friend class application;
 public:
     // valeur sur les pin
     unsigned short io[MAX_IO_PIN];
@@ -132,7 +133,7 @@ public:
     // fonction arduino : boucle de controle de la carte arduino
     void loop();
     //Exception générée dans le cas où le vecteur de temps n'est pas encore rempli
-    class Erreur
+    /*class Erreur
     {
         private:
             string code;
@@ -145,7 +146,9 @@ public:
             {
                 return code;
             }
-    };
+    };*/
+private:
+    application *mon_application;
 };
 
 #endif
