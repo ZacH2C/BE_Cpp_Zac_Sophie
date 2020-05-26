@@ -25,9 +25,8 @@ void Shaker::run()
             EntreeActionneur=*ptrmem;
         else
             EntreeActionneur=LOW;
-        if (EntreeActionneur==LOW)
+        if (EntreeActionneur==LOW){}
             //cout << "########## Pas de secousses ##########\n";
-            NULL;
         else
         {
             accel_env.modif_vect(amplitude, amplitude, amplitude);

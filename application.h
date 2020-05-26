@@ -29,7 +29,7 @@ public:
 
     ///Méthodes principale !NE PAS UTILISER EN MEME TEMPS!
     void do_one_step_lumiere(float echantillonage_board);
-    void do_one_step_convulsions();
+    void do_one_step_convulsions(float echantillonage_board);
 
 private:
     Board *ma_board;

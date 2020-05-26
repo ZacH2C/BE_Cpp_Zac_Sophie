@@ -12,7 +12,7 @@ int main()
 {
     // creation d'une board
     Board esp8266;
-
+/*
     AnalogSensorLuminosity Luminosite(10,luminosite_environnement);
     esp8266.pin(1,Luminosite);
 
@@ -25,8 +25,9 @@ int main()
 
     ExternalDigitalSensorButton BPoussoir;
     esp8266.pin(2,BPoussoir);
+*/
 
-    /*
+
     //Acceleromètres
     AnalogSensorAccel Accel_X(0.1,'X');
     esp8266.pin(7,Accel_X);
@@ -34,10 +35,10 @@ int main()
     esp8266.pin(8,Accel_Y);
     AnalogSensorAccel Accel_Z(0.1,'Z');
     esp8266.pin(9,Accel_Z);
+
     //Shaker
     Shaker My_Shaker(10,1,1);
     esp8266.pin(14,My_Shaker);
-    */
 
     //allumage de la carte
     esp8266.run();
