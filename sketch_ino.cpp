@@ -21,7 +21,7 @@ void Board::setup()
   // on configure la vitesse de la liaison
   Serial.begin(9600);
 
-  // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
+  // on fixe les pin en entree et en sortie en fonction des capteurs/actionneurs mis sur la carte
   int i;
   for(i=0 ; i<10 ; i++)
   {

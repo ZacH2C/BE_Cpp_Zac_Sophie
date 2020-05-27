@@ -15,13 +15,6 @@
 #include "mydevices.h"
 //!Sophie
 
-//Pour accéléro
-extern vecteur_accel accel_env;
-//Mémorisation de la stabilité
-vecteur_accel accel_stab(accel_env);
-int cpt_stab, cpt_perturb = 0;
-//FinPourAccelero
-
 //Constructeur
 application::application()
 {
@@ -40,6 +33,9 @@ application::application(Board *b)
     bascule=0;
     robustesse=0;
     ma_board=b;
+
+    cpt_stab=0;
+    cpt_perturb=0;
 }
 
 //Mutateur
@@ -125,30 +121,44 @@ bool application::Traitement_frequence_clignotement(vector<float> vecteur_temps)
 
 bool application::Detection_convulsions()
 {
-    cout<<"Env:"<<endl;
-    accel_env.afficher_vect();
-    cout<<"Ref:"<<endl;
-    accel_stab.afficher_vect();
+    //Récupération du vecteur d'environnement capté
+    vecteur_accel accel_capteurs(ma_board->analogRead(7),
+                                 ma_board->analogRead(8),
+                                 ma_board->analogRead(9));
+    //Correction offsetcapteurs
+    accel_capteurs.modif_vect(-OFFSET,-OFFSET,-OFFSET);
+    cout<<"#############################################################################"<<endl;
 
-    float tolerance_angle = 5; //Degs
-    float tolerance_norme = 10;
-    bool retour=FALSE;
+    //cout<<"Env Reel:";accel_env.afficher_vect();
+    //cout<<"Norme Env="<<accel_env.norme_vect()<<endl;
+
+    cout<<"Capteurs:";accel_capteurs.afficher_vect();
+    //cout<<"Norme Env="<<accel_capteurs.norme_vect()<<endl;
+
+    cout<<"Ref:     ";accel_stab.afficher_vect();
+    //cout<<"Norme Ref="<<accel_stab.norme_vect()<<endl;
+
+    cout<<"Angle="<<accel_capteurs-accel_stab<<endl;
+    cout<<"Diff Norme="<<accel_capteurs.norme_vect()-accel_stab.norme_vect()<<endl;
+    float tolerance_angle = 10; //Degs
+    float tolerance_norme = 3;
+
+
+
+    bool retour=false;
     //On cherche à détecter les changements par rapport à ce qu'on a mémorisé comme position de stabilité
-    if ((accel_env-accel_stab)<tolerance_angle) //Pas de variation d'angle, on est a priori statiques ou en train de marcher
+    if ((accel_capteurs-accel_stab)<tolerance_angle) //Pas de variation d'angle, on est a priori statiques ou en train de marcher
     {
-        cout<<"Pas de variation d'angle"<<endl;
-        cout<<"Angle="<<accel_env-accel_stab<<endl;
+        cout<<"Pas/peu de variation d'angle"<<endl;
         //Dans ce cas, tout va bien
-        //on décrémente le compteur de perturbations et on incrémente le compteur de stabilité
-        if (cpt_perturb>0) cpt_perturb--;
+        //on incrémente le compteur de stabilité
         cpt_stab++;
     }
     else //Variation d'angle, on veut savoir si on a juste tourné l'accéléro ou si la norme a changé aussi
     {
-        if (abs(accel_env.norme_vect()-accel_stab.norme_vect())<tolerance_norme)
+        if (abs(accel_capteurs.norme_vect()-accel_stab.norme_vect())<tolerance_norme)
         {
-            cout<<"Var angle et pas norme : Tourne"<<endl;
-            cout<<"Angle="<<accel_env-accel_stab<<endl;
+            cout<<"Variation angle et pas/peu norme : Rotation tranquille"<<endl;
             //On est dans le cas où l'accéléromètre est simplement tourné (var d'angle mais pas de norme)
             //Il n'y a donc a priori pas de pb, on change simplement de position d'équilibre
             //Cependant, on prend quand même en compte la possibilité d'une crise donc on ne décrémente pas cpt_perturb
@@ -157,22 +167,26 @@ bool application::Detection_convulsions()
         else //Variation d'angle et de norme : PB
         {
             cout<<"Var angle et norme"<<endl;
+            cout<<"!!Secousse detectee!!"<<endl;
             cpt_stab=0;
             cpt_perturb++;
             accel_stab=accel_env;
             //On enregistre la position pour savoir si on a encore bougé à la prochaine itération
         }
     }
-    if (cpt_perturb>10) //On a rencontré trop de perturbations, on donne la priorité aux perturbations
+    if (cpt_perturb>8) //On a rencontré trop de perturbations, on donne la priorité aux perturbations
     {
-        cout<<"Trop de secousses"<<endl;
-        //FAIRE QQCHOSE GENRE UN BIP OU JSP MAIS CA VA PAS PK PAS UNE !EXCEPTION!
+        cpt_perturb=0;
+        cpt_stab=0;
+        cout<<"!!!!!!!!!!!!!!!!!!!!Trop de secousses successives!!!!!!!!!!!!!!!!!!!!!"<<endl;
+        cout<<"!!!!!!!!!!!!!!!!!!!!    POSSIBLES CONVULSIONS    !!!!!!!!!!!!!!!!!!!!!"<<endl;
         retour = true;
     }
     else
     {
         if (cpt_stab>5) //On est stable depuis suffisamment longtemps
         {
+            cout<<"-------------Nouvelle position de reference-------------"<<endl;
             accel_stab=accel_env;       //Stockage nouvel éq
             cpt_stab = 0;
             cpt_perturb = 0;  //RàZ
@@ -244,10 +258,16 @@ void application::do_one_step_lumiere(float echantillonage_board )
 }
 void application::do_one_step_convulsions(float echantillonage_board)
 {
-
-    ma_board->digitalWrite(14,LOW);
-    cout<<"Valeurs mesurees : \nX:"<<ma_board->analogRead(7)-OFFSET<<" Y:"<<ma_board->analogRead(8)-OFFSET<<" Z:"<<ma_board->analogRead(9)-OFFSET<<endl; //!OFFSET pour l'affichage
-    cout<<"Valeurs reelles : \nX:"<<accel_env.get_val('X')<<" Y:"<<accel_env.get_val('Y')<<" Z:"<<accel_env.get_val('Z')<<endl;
-    Detection_convulsions();
+    ma_board->digitalWrite(14,HIGH);
+    if(Detection_convulsions())
+    {
+            while(ma_board->analogRead(2) != 1)
+            {
+                ma_board->digitalWrite(15,HIGH);
+                sleep(1);
+                ma_board->digitalWrite(15,LOW);
+                sleep(echantillonage_board);
+            }
+    }
     sleep(echantillonage_board);
 }

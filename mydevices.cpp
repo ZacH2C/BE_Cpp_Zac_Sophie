@@ -11,9 +11,8 @@
 
 using namespace std;
 int luminosite_environnement=200;
-int Accel_env_XYZ[3]={3,18,-20}; //Valeur standard de l'accélération de l'environnement en g
 
-vecteur_accel accel_env(12,1,5);
+vecteur_accel accel_env(0,0,-8);
 
 //################################### CAPTEURS ###################################
 

@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 #include "core_simulation.h"
+#include "Vecteurs_accel.h"
+
 using namespace std;
 
 class Board;
@@ -27,17 +29,23 @@ public:
     bool Detection_convulsions();
     ///TODO : UTILISATION CAPTEURS, TESTS
 
-    ///Méthodes principale !NE PAS UTILISER EN MEME TEMPS!
+    ///Méthodes principales !NE PAS UTILISER EN MEME TEMPS!
     void do_one_step_lumiere(float echantillonage_board);
     void do_one_step_convulsions(float echantillonage_board);
 
 private:
     Board *ma_board;
-    ///METTRE VAR GLOBALES
+    ///VAR GLOBALES
+    //DetectFlash
     bool epilepsie;
     int i; int j;
     int bascule;
     map<float,int> tableau;
     int robustesse;
+    //DetectSecousses
+    vecteur_accel accel_stab;
+    int cpt_stab;
+    int cpt_perturb;
+
 };
 #endif

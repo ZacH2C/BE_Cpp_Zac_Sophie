@@ -16,7 +16,7 @@
 #define I2C_BUFFER_SIZE 1024
 #define MAX_IO_PIN 6
 
-#define OFFSET 20 //sert pour l'accéléro car on ne peut pas communiquer du négatif par les pins
+#define OFFSET 500 //sert pour l'accéléro car on ne peut pas communiquer du négatif par les pins
 #include <map>
 #include <vector>
 #include "application.h"

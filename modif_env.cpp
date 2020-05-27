@@ -7,34 +7,42 @@
 #endif
 #include<map>
 #include <pthread.h>
+#include <stdlib.h>
 
 //On créé un actionneur virtuel qui n'est pas relié à la board mais qui modifie l'environnement
 //classe Shaker
-Shaker::Shaker(int amplitude_param, int F_param, int t):Actionneurs(t)
+Shaker::Shaker(int amplitude_param, float T_param, int t):Actionneurs(t)
 {
     amplitude = amplitude_param; //alpha en %
-    F = F_param; //F en Hz
+    T = T_param; //T en s
+    aleaX=0;
+    aleaY=0;
+    aleaZ=0;
 }
 
 void Shaker::run()
 {
-    float T = 1/F;
     while(1)
     {
+        aleaX=(rand() % 5)-2;
+        aleaY=(rand() % 5)-2;
+        aleaZ=(rand() % 5)-2;
+
         if(ptrmem!=NULL)
             EntreeActionneur=*ptrmem;
         else
             EntreeActionneur=LOW;
-        if (EntreeActionneur==LOW){}
+        if (EntreeActionneur==LOW)
+        {
             //cout << "########## Pas de secousses ##########\n";
+            sleep(T);
+        }
         else
         {
-            accel_env.modif_vect(amplitude, amplitude, amplitude);
-            //cout<<"UP"<<endl;
-            sleep(T/2);
-            accel_env.modif_vect(-amplitude, -amplitude, -amplitude);
-            //cout<<"DOWN"<<endl;
-            sleep(T/2);
+            //Modif aléatoire de l'environnement
+            //cout<<"~~~~Aleas:"<<aleaX*amplitude<<"/"<<aleaY*amplitude<<"/"<<aleaZ*amplitude<<endl;
+            accel_env.modif_vect(aleaX*amplitude,aleaY*amplitude,aleaZ*amplitude);
+            sleep(T);
         }
 
     }

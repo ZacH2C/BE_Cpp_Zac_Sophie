@@ -14,6 +14,7 @@
 #include "mydevices.h"
 #include "Vecteurs_accel.h"
 
+//Permet de modifier directement l'environnement
 extern int luminosite_environnement;
 extern vecteur_accel accel_env;
 
@@ -22,10 +23,13 @@ class Shaker: public Actionneurs
 {
 private:
     int amplitude; //amplitude des secousses
-    int F; //fréquence des secousses en Hz
+    float T; //Période des secousses en s
+    int aleaX;
+    int aleaY;
+    int aleaZ;
 public:
     // initialisation de la fréq de shake et du rapport cyclique
-  Shaker(int amplitude_param, int F_param, int t);
+  Shaker(int amplitude_param, float T_param, int t);
   // thread representant l'actionneur et permettant de fonctionner independamment de la board
   virtual void run();
 };

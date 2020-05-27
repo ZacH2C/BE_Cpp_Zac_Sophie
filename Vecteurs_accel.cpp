@@ -58,14 +58,21 @@ int operator*(vecteur_accel const& vect_a, vecteur_accel const& vect_b)
     return vect_a.get_val('X')*vect_b.get_val('X')+vect_a.get_val('Y')*vect_b.get_val('Y')+vect_a.get_val('Z')*vect_b.get_val('Z');
 }
 
-//Angle entre deux vecteurs
+//Angle entre deux vecteurs (en degrés)
 float operator-(vecteur_accel const& vect_a, vecteur_accel const& vect_b)
 {
-    float retour;
-    cout<<"OPERATION\n"<<endl;
-    if(vect_a.norme_vect()==0 || vect_b.norme_vect()==0) retour=0;
-    else retour=acos((vect_a*vect_b)/(vect_a.norme_vect()*vect_b.norme_vect()))*180/PI;
-    return retour;
+    float teta;
+    float cos_teta;
+    if((vect_a.norme_vect()==0) || (vect_b.norme_vect()==0))
+        {teta=0;}
+    else
+    {
+        cos_teta = (vect_a*vect_b)/(vect_a.norme_vect()*vect_b.norme_vect());
+        //Détection d'erreurs infinitésimales
+        if(cos_teta>1 && cos_teta<1.0001) {cos_teta=1;}
+        teta=acos(cos_teta)*(180/PI);
+    }
+    return teta;
 }
 
 ///La fonction acos a comme specs :
