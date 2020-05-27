@@ -37,6 +37,6 @@ void Board::setup()
 // la boucle de controle arduino
 void Board::loop()
 {
-    mon_application->do_one_step_lumiere(10);
-    //mon_application->do_one_step_convulsions(1000);
+    //mon_application->do_one_step_lumiere(10);
+    mon_application->do_one_step_convulsions(1000);
 }

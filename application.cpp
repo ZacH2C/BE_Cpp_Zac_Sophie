@@ -170,7 +170,7 @@ bool application::Detection_convulsions()
             cout<<"!!Secousse detectee!!"<<endl;
             cpt_stab=0;
             cpt_perturb++;
-            accel_stab=accel_env;
+            accel_stab=accel_capteurs;
             //On enregistre la position pour savoir si on a encore bougé à la prochaine itération
         }
     }
@@ -187,7 +187,7 @@ bool application::Detection_convulsions()
         if (cpt_stab>5) //On est stable depuis suffisamment longtemps
         {
             cout<<"-------------Nouvelle position de reference-------------"<<endl;
-            accel_stab=accel_env;       //Stockage nouvel éq
+            accel_stab=accel_capteurs;       //Stockage nouvel éq
             cpt_stab = 0;
             cpt_perturb = 0;  //RàZ
         }
