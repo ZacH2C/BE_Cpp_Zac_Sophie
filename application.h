@@ -27,11 +27,26 @@ public:
 
     ///Méthodes convulsions
     bool Detection_convulsions();
-    ///TODO : UTILISATION CAPTEURS, TESTS
 
     ///Méthodes principales !NE PAS UTILISER EN MEME TEMPS!
     void do_one_step_lumiere(float echantillonage_board);
     void do_one_step_convulsions(float echantillonage_board);
+
+    //Exception générée dans le cas où le vecteur de temps n'est pas encore rempli
+    class Erreur
+    {
+        private:
+            string code;
+        public:
+            Erreur(string ch)
+            {
+                code = ch;
+            }
+            string getErreur()
+            {
+                return code;
+            }
+    };
 
 private:
     Board *ma_board;

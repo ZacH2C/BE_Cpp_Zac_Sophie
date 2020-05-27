@@ -132,21 +132,7 @@ public:
     void setup();
     // fonction arduino : boucle de controle de la carte arduino
     void loop();
-    //Exception générée dans le cas où le vecteur de temps n'est pas encore rempli
-    /*class Erreur
-    {
-        private:
-            string code;
-        public:
-            Erreur(string ch)
-            {
-                code = ch;
-            }
-            string getErreur()
-            {
-                return code;
-            }
-    };*/
+
 private:
     application *mon_application;
 };

@@ -81,7 +81,7 @@ bool application::Traitement_lumiere(map<float,int> dernieres_secondes, float pe
 
     if(dernieres_secondes.size()<= 3000/periode_echantillonage)
     {
-        //throw Erreur(string("Il faut attendre trois secondes au demarage"));
+        throw Erreur(string("Il faut attendre trois secondes au demarage"));
     }
     else
     {
@@ -221,17 +221,17 @@ void application::do_one_step_lumiere(float echantillonage_board )
 
     //On stocke la lumière et les temps qui y sont associés dans une map et on traite ces informations
     tableau = Stockage_lumiere(tableau,val_lumiere, echantillonage_board,i);
-    epilepsie = Traitement_lumiere(tableau, echantillonage_board);
-    /*
+    //epilepsie = Traitement_lumiere(tableau, echantillonage_board);
+
     try
     {
         epilepsie = Traitement_lumiere(tableau, echantillonage_board);
     }
-    catch(Board::Erreur monErreur)
+    catch(application::Erreur monErreur)
     {
-        Serial.println(monErreur.getErreur());
+        ma_board->Serial.println(monErreur.getErreur());
     }
-    */
+
 
     //Si la lumière peut provoquer une crise d'épilespsie, alors on incrémente un compteur jusqu'à 3 (sinon on détecte trop facilement des lumières nocives alors que ce n'est pas forcément le cas
     if(epilepsie == 1)
