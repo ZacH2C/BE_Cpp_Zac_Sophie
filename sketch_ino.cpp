@@ -10,9 +10,10 @@
 #include "core_simulation.h"
 #include "Vecteurs_accel.h"
 #include "application.h"
-//!Sophie
+
 #include <map>
 #include <vector>
+
 
 
 // la fonction d'initialisation d'arduino
@@ -37,6 +38,8 @@ void Board::setup()
 // la boucle de controle arduino
 void Board::loop()
 {
-    //mon_application->do_one_step_lumiere(10);
-    mon_application->do_one_step_convulsions(1000);
+
+    mon_application->do_one_step_lumiere(10);
+    //mon_application->do_one_step_convulsions(1000);
+
 }

@@ -12,6 +12,7 @@
 
 #include "core_simulation.h"
 
+
 // class BoardException
 int BoardException::get(){return num;}
 

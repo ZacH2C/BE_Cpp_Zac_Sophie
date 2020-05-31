@@ -21,6 +21,11 @@
 #include <vector>
 #include "application.h"
 
+//Variable permettant de choisir la fonction à utiliser
+//TRUE : Détection des flashs lumineux
+//FALSE : Détection des convulsions
+#define CHOIX_MODE true
+
 using namespace std;
 
 class application;

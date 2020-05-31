@@ -13,7 +13,6 @@
 #include "Vecteurs_accel.h"
 #include "modif_env.h"
 #include "mydevices.h"
-//!Sophie
 
 //Constructeur
 application::application()

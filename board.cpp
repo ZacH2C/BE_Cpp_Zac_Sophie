@@ -18,18 +18,15 @@ int main()
     ExternalDigitalSensorButton BPoussoir;
     esp8266.pin(2,BPoussoir);
 
-
-/*
-    ///Détection de la lumiere
+    ///Détection des flashs lumineux
     AnalogSensorLuminosity Luminosite(10,luminosite_environnement);
     esp8266.pin(1,Luminosite);
 
     //Entre 25 et 33 pour déclencher une crise d'épilepsie (+marge)
-    IntelligentDigitalActuatorLED LED_intelligente(50);
+    IntelligentDigitalActuatorLED LED_intelligente(25);
     esp8266.pin(13,LED_intelligente);
-*/
 
-
+/*
     ///Détection des convulsions
     //Acceleromètres
     AnalogSensorAccel Accel_X(0.1,'X');
@@ -41,8 +38,10 @@ int main()
     AnalogSensorAccel Accel_Z(0.1,'Z');
     esp8266.pin(9,Accel_Z);
     //Shaker
-    Shaker My_Shaker(1,0.5,0); //1 ne détecte pas, 3 détecte
+    Shaker My_Shaker(3,0.5,0); //1 ne détecte pas, 3 détecte
     esp8266.pin(14,My_Shaker);
+*/
+
 
 
     //allumage de la carte
