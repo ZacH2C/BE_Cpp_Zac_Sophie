@@ -10,3 +10,5 @@ Dans le fichier board.cpp, il faut que les lignes du Bouton Poussoir et du Bipeu
 
 Pour simuler une lumière qui peut provoquer une crise d'épilepsie, il faut fixer la période de la LED intelligente (dans le fichier board.cpp) entre 25 et 33.
 Pour simuler des secousses qui provoquent un déclenchement de la détection de convulsions, il faut choisir une amplitude du Shaker supérieure à 3. A 1, les secousses sont suffisamment faibles pour être détectées parfois mais elles ne déclencheront pas l'avertissement car trop peu importantes successivement.
+
+Lorsqu'un clignotement à risque ou des convulsions sont détectées, un bip sonore est émis jusqu'à appui sur un bouton par l'utilisateur. L'appui sur ce bouton est simulé par l'ajout d'un fichier "on.txt" dans le répertoire de l'executable.
